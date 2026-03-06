@@ -1,0 +1,1426 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Autotech Sistemas — Tecnologia Automotiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   DESIGN SYSTEM — AUTOTECH RACING
+   Ferrari Red · Porsche Yellow · BMW Blue
+═══════════════════════════════════════ */
+:root {
+  --red:#DC143C; --red-dk:#9B0D23;
+  --yellow:#FFCC00; --blue:#1C69D4; --blue-dk:#0A3D9C; --orange:#FF8000;
+  --c0:#0D0D0D; --c1:#141416; --c2:#1C1C20; --c3:#252529; --c4:#303036;
+  --cb:rgba(255,255,255,.07); --cb2:rgba(255,255,255,.13);
+  --lt:#F4F4EF; --ltS:#FFFFFF; --ltB:rgba(0,0,0,.09);
+  --txd:#0D0D0D; --txm:#555;
+  --font:'Montserrat',sans-serif;
+  --gr:linear-gradient(135deg,var(--red),var(--red-dk));
+  --gb:linear-gradient(135deg,var(--blue),var(--blue-dk));
+  --gy:linear-gradient(135deg,var(--yellow),#D4A800);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--c0);color:#f0f0f0;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+.rt{font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.5px;}
+
+/* Shared helpers */
+.eyebrow{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--cb2);color:rgba(255,255,255,.45);font-size:10px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:2px;padding:5px 14px;border-radius:2px;margin-bottom:16px;background:rgba(255,255,255,.03);transform:skewX(-9deg);}
+.eyebrow>*,.eyebrow-inner{transform:skewX(9deg);display:inline-block;}
+.eyebrow.lt{border-color:rgba(0,0,0,.1);color:rgba(0,0,0,.4);background:rgba(0,0,0,.03);}
+.sec-title{font-size:clamp(28px,4.5vw,46px);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.5px;line-height:1.1;color:#fff;}
+.sec-title.dk{color:var(--txd);}
+.sec-sub{font-size:clamp(13px,2vw,15px);color:rgba(255,255,255,.5);font-weight:500;line-height:1.7;max-width:560px;}
+.sec-sub.dk{color:var(--txm);}
+.hl-r{position:relative;display:inline-block;z-index:1;color:#fff;}
+.hl-r::after{content:'';position:absolute;bottom:4px;left:-3px;right:-3px;height:clamp(10px,1.8vw,15px);background:var(--red);z-index:-1;transform:skewX(-14deg);}
+.hl-y{color:var(--yellow);text-shadow:0 0 30px rgba(255,204,0,.4);}
+.btn-r{background:var(--gr);color:#fff;font-size:12.5px;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:1.5px;padding:14px 36px;border-radius:4px;border:none;cursor:pointer;font-family:var(--font);transition:all .3s;box-shadow:0 6px 24px rgba(220,20,60,.35);transform:skewX(-8deg);display:inline-block;}
+.btn-r>span{display:inline-block;transform:skewX(8deg);}
+.btn-r:hover{box-shadow:0 12px 36px rgba(220,20,60,.55);transform:skewX(-8deg) translateY(-2px);}
+.btn-o{background:transparent;color:#fff;font-size:12.5px;font-weight:700;font-style:italic;text-transform:uppercase;letter-spacing:1.5px;padding:14px 32px;border-radius:4px;border:1.5px solid rgba(255,255,255,.25);cursor:pointer;font-family:var(--font);transition:all .3s;transform:skewX(-8deg);display:inline-block;}
+.btn-o>span{display:inline-block;transform:skewX(8deg);}
+.btn-o:hover{border-color:#fff;background:rgba(255,255,255,.06);}
+.btn-dk{background:var(--gr);color:#fff;font-size:12.5px;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:1.5px;padding:14px 36px;border-radius:4px;border:none;cursor:pointer;font-family:var(--font);transition:all .3s;box-shadow:0 6px 24px rgba(220,20,60,.3);transform:skewX(-8deg);display:inline-block;}
+.btn-dk>span{display:inline-block;transform:skewX(8deg);}
+.btn-dk:hover{box-shadow:0 12px 36px rgba(220,20,60,.5);transform:skewX(-8deg) translateY(-2px);}
+
+/* ═══ NAVBAR ═══ */
+.nav-wrap{position:fixed;top:0;left:0;width:100%;z-index:999;padding:18px 20px 0;display:flex;justify-content:center;}
+.nav-bar{width:100%;max-width:1280px;height:66px;background:rgba(18,18,20,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--cb2);border-top:2px solid var(--red);border-radius:6px;display:flex;align-items:stretch;box-shadow:0 16px 50px rgba(0,0,0,.6);overflow:hidden;}
+.nav-logo{padding:0 24px 0 22px;display:flex;align-items:center;gap:10px;border-right:1px solid var(--cb2);background:#080808;flex-shrink:0;}
+.logo-tri{width:4px;height:34px;border-radius:2px;background:linear-gradient(to bottom,var(--blue) 33%,var(--red) 33% 66%,var(--yellow) 66%);flex-shrink:0;}
+.logo-box{border:1.5px solid rgba(255,255,255,.75);padding:3px 9px;border-radius:2px;}
+.logo-main{font-size:16px;font-weight:900;font-style:italic;letter-spacing:3px;color:#fff;display:block;line-height:1;}
+.logo-sub{font-size:7px;font-weight:800;letter-spacing:5px;color:var(--red);text-transform:uppercase;display:block;margin-top:2px;}
+.nav-links{flex:1;display:flex;align-items:center;justify-content:center;padding:0 16px;}
+.nav-links ul{list-style:none;display:flex;gap:2px;}
+.nav-links a{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:rgba(255,255,255,.5);padding:7px 12px;border-radius:4px;display:flex;align-items:center;gap:4px;transition:all .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(255,255,255,.07);}
+.nav-ch{width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-bottom:1px;}
+.nav-right{display:flex;align-items:center;padding:0 16px;gap:12px;border-left:1px solid var(--cb2);flex-shrink:0;}
+.nav-soc{color:rgba(255,255,255,.4);display:flex;align-items:center;transition:color .2s;flex-shrink:0;}
+.nav-soc:hover{color:#fff;}
+.nav-soc svg{width:15px;height:15px;}
+.nav-cta{background:var(--gr);color:#fff;font-size:10.5px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:1px;padding:8px 18px;border-radius:4px;border:none;cursor:pointer;font-family:var(--font);transition:all .25s;white-space:nowrap;box-shadow:0 4px 16px rgba(220,20,60,.3);}
+.nav-cta:hover{box-shadow:0 8px 24px rgba(220,20,60,.5);transform:translateY(-1px);}
+.nav-hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;}
+.nav-hbg span{display:block;width:20px;height:2px;background:#fff;border-radius:1px;transition:all .3s;}
+.mob-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(13,13,13,.98);backdrop-filter:blur(22px);z-index:1000;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+.mob-menu.open{display:flex;}
+.mob-menu a{font-size:20px;font-weight:900;font-style:italic;text-transform:uppercase;color:rgba(255,255,255,.55);padding:11px 28px;letter-spacing:1px;transition:color .2s;}
+.mob-menu a:hover{color:#fff;}
+.mob-close{position:absolute;top:22px;right:22px;background:none;border:1px solid var(--cb2);color:#fff;width:38px;height:38px;border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;}
+.mob-cta{margin-top:14px;background:var(--gr);color:#fff;font-size:13px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:1.5px;padding:14px 36px;border-radius:5px;border:none;cursor:pointer;font-family:var(--font);}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;min-height:100vh;padding:clamp(130px,14vw,185px) 20px 0;display:flex;flex-direction:column;align-items:center;overflow:hidden;background:var(--c0);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 58% 58% at 8% 25%,rgba(220,20,60,.52) 0%,transparent 65%),radial-gradient(ellipse 55% 50% at 92% 40%,rgba(28,105,212,.52) 0%,transparent 65%),radial-gradient(ellipse 35% 30% at 50% 100%,rgba(255,204,0,.14) 0%,transparent 60%);pointer-events:none;z-index:0;}
+.hero::after{content:'';position:absolute;inset:0;background-image:repeating-conic-gradient(rgba(255,255,255,.018) 0% 25%,transparent 0% 50%);background-size:44px 44px;pointer-events:none;z-index:0;}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:940px;margin-bottom:clamp(32px,5vw,50px);display:flex;flex-direction:column;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,204,0,.08);border:1px solid rgba(255,204,0,.28);border-radius:30px;padding:6px 16px;margin-bottom:22px;font-size:11px;font-weight:700;color:var(--yellow);}
+.badge-dot{width:7px;height:7px;background:var(--yellow);border-radius:50%;animation:pdot 2s infinite;}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.5);}}
+.hero-h1{font-size:clamp(30px,5.5vw,66px);font-weight:900;font-style:italic;text-transform:uppercase;line-height:1.1;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.5);margin-bottom:20px;letter-spacing:-1px;}
+.hero-sub{font-size:clamp(14px,2vw,17px);color:rgba(255,255,255,.7);font-weight:500;line-height:1.7;max-width:600px;margin:0 auto 32px;}
+.hero-acts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.hero-stats{display:flex;gap:32px;margin-top:28px;flex-wrap:wrap;justify-content:center;}
+.hero-stat{text-align:center;}
+.hero-stat-n{font-size:22px;font-weight:900;font-style:italic;color:#fff;letter-spacing:-1px;}
+.hero-stat-l{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.4);margin-top:2px;}
+
+/* Dashboard */
+.hero-dash-wrap{position:relative;z-index:2;width:100%;max-width:1180px;border-radius:12px 12px 0 0;overflow:hidden;border:1px solid var(--cb2);border-bottom:none;box-shadow:0 -3px 0 0 rgba(220,20,60,.55),0 30px 80px rgba(0,0,0,.9);}
+.hero-dash-wrap::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(transparent,var(--c0));pointer-events:none;z-index:10;}
+.dash{display:flex;height:580px;background:#f7f7fb;font-family:var(--font);font-size:13px;color:#1a1a2e;}
+.dsb{width:160px;flex-shrink:0;background:#fff;border-right:1px solid #e6e6f0;display:flex;flex-direction:column;padding:14px 0;}
+.dsb-logo{display:flex;align-items:center;gap:8px;padding:0 12px 14px;border-bottom:1px solid #f0f0f8;margin-bottom:8px;}
+.dsb-li{width:28px;height:28px;background:var(--gb);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.dsb-li svg{width:14px;height:14px;color:#fff;}
+.dsb-lt{font-weight:800;font-size:12.5px;color:#1a1a2e;}
+.dsb-nav{display:flex;flex-direction:column;gap:1px;padding:0 7px;flex:1;overflow:hidden;}
+.dsb-i{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:5px;cursor:pointer;color:#999;font-size:11px;font-weight:600;position:relative;transition:all .2s;}
+.dsb-i:hover{background:#f5f5fb;color:#1a1a2e;}
+.dsb-i.on{background:#EEF3FF;color:var(--blue);}
+.dsb-i.on::before{content:'';position:absolute;left:-7px;top:50%;transform:translateY(-50%);width:3px;height:50%;background:var(--blue);border-radius:0 2px 2px 0;}
+.dsb-i svg{width:13px;height:13px;flex-shrink:0;}
+.dsb-badge{margin-left:auto;background:var(--red);color:#fff;font-size:8px;font-weight:800;padding:1px 5px;border-radius:8px;}
+.dsb-sub{padding-left:30px;display:flex;flex-direction:column;gap:1px;}
+.dsb-si{padding:3px 7px;border-radius:4px;color:#ccc;font-size:10px;font-weight:600;cursor:pointer;transition:color .2s;}
+.dsb-si:hover{color:#1a1a2e;}
+.dsb-up{margin:8px 7px 0;background:var(--gb);border-radius:7px;padding:10px;color:#fff;}
+.dsb-up h5{font-size:9.5px;font-weight:800;margin-bottom:3px;}
+.dsb-up p{font-size:8.5px;opacity:.8;margin-bottom:6px;line-height:1.4;}
+.dsb-upb{display:block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;text-align:center;padding:4px;border-radius:3px;font-size:8.5px;font-weight:700;cursor:pointer;}
+.dsb-upb:hover{background:rgba(255,255,255,.35);}
+.dash-main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.dash-top{height:48px;background:#fff;border-bottom:1px solid #e6e6f0;display:flex;align-items:center;padding:0 14px;gap:9px;flex-shrink:0;}
+.dash-srch{flex:1;max-width:220px;background:#f5f5fb;border:1px solid #e6e6f0;border-radius:5px;padding:5px 9px;display:flex;align-items:center;gap:6px;color:#ccc;}
+.dash-srch input{border:none;background:transparent;outline:none;font-family:var(--font);font-size:10.5px;color:#666;width:100%;}
+.dash-srch input::placeholder{color:#ccc;}
+.dash-kbd{background:#ebebf5;padding:1px 5px;border-radius:3px;font-size:8.5px;color:#ccc;font-weight:600;}
+.dash-tr{display:flex;align-items:center;gap:7px;margin-left:auto;}
+.dash-ico{width:28px;height:28px;border-radius:5px;background:#f5f5fb;border:1px solid #e6e6f0;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#888;position:relative;}
+.dash-ico svg{width:12px;height:12px;}
+.dash-nd{position:absolute;top:4px;right:4px;width:6px;height:6px;background:var(--red);border-radius:50%;border:1.5px solid #fff;}
+.dash-av{width:28px;height:28px;border-radius:6px;background:var(--gr);display:flex;align-items:center;justify-content:center;color:#fff;font-size:9.5px;font-weight:800;cursor:pointer;}
+.dash-body{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:10px;}
+.dash-body::-webkit-scrollbar{width:3px;}
+.dash-body::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px;}
+.dash-ph{display:flex;align-items:center;justify-content:space-between;}
+.dash-ph h1{font-size:17px;font-weight:800;color:#1a1a2e;}
+.dash-ha{display:flex;align-items:center;gap:6px;}
+.dash-db{display:flex;align-items:center;gap:4px;padding:5px 9px;background:#fff;border:1px solid #e6e6f0;border-radius:5px;font-size:9.5px;font-weight:600;color:#555;cursor:pointer;white-space:nowrap;}
+.dash-db svg{width:10px;height:10px;color:#aaa;}
+.dash-ex{display:flex;align-items:center;gap:4px;padding:5px 11px;background:var(--blue);border:none;border-radius:5px;font-size:9.5px;font-weight:700;color:#fff;cursor:pointer;font-family:var(--font);}
+.dash-ex svg{width:10px;height:10px;}
+.dash-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.dash-kpi{background:#fff;border:1px solid #e6e6f0;border-radius:8px;padding:11px 12px;}
+.dash-kh{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.dash-kl{font-size:9.5px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:.4px;}
+.dash-ki{width:24px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;}
+.dash-ki svg{width:12px;height:12px;}
+.kb{background:#EEF3FF;color:var(--blue);}.kg{background:#EDFBF2;color:#16a34a;}.kr{background:#FFF0F2;color:var(--red);}.ko{background:#FFF6ED;color:var(--orange);}
+.dash-kv{font-size:18px;font-weight:900;color:#1a1a2e;margin-bottom:4px;letter-spacing:-1px;}
+.dup{color:#16a34a;font-size:9.5px;font-weight:700;}.ddn{color:var(--red);font-size:9.5px;font-weight:700;}
+.dvs{color:#ccc;font-weight:500;font-size:8.5px;margin-left:2px;}
+.dash-mid{display:grid;grid-template-columns:1fr 240px;gap:8px;}
+.dcard{background:#fff;border:1px solid #e6e6f0;border-radius:8px;padding:12px;}
+.dct{font-size:11px;font-weight:800;color:#1a1a2e;margin-bottom:2px;}
+.dcv{font-size:20px;font-weight:900;color:#1a1a2e;letter-spacing:-1px;}
+.dcb{display:inline-flex;align-items:center;gap:3px;background:#EDFBF2;color:#16a34a;font-size:8.5px;font-weight:700;padding:2px 6px;border-radius:14px;margin-top:2px;}
+.dspk{width:100%;height:72px;margin-top:8px;}
+.dbh{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.dbars{display:flex;align-items:flex-end;gap:4px;height:62px;}
+.dbc{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;}
+.dbf{width:100%;border-radius:3px 3px 0 0;background:#e8e8f5;min-height:4px;}
+.dbf.on{background:var(--blue);}
+.dbd{font-size:7.5px;font-weight:700;color:#ccc;}.dbd.on{color:var(--blue);}
+.dash-bot{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.dsegs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:7px;}
+.dseg{border-radius:5px;padding:8px 6px;text-align:center;}
+.ds-b{background:#EEF3FF;}.ds-g{background:#EDFBF2;}.ds-o{background:#FFF6ED;}
+.dseg-ico{width:18px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;margin:0 auto 3px;}
+.ds-b .dseg-ico{background:var(--blue);color:#fff;}.ds-g .dseg-ico{background:#16a34a;color:#fff;}.ds-o .dseg-ico{background:var(--orange);color:#fff;}
+.dseg-ico svg{width:9px;height:9px;}
+.dseg-v{font-size:13px;font-weight:900;color:#1a1a2e;}
+.dseg-l{font-size:7.5px;font-weight:700;color:#aaa;text-transform:uppercase;}
+table.dtbl{width:100%;border-collapse:collapse;}
+.dtbl th{font-size:7.5px;font-weight:700;color:#ccc;text-transform:uppercase;letter-spacing:.3px;padding:0 4px 6px;text-align:left;}
+.dtbl th:not(:first-child){text-align:right;}
+.dtbl td{padding:5px 4px;font-size:9.5px;font-weight:600;color:#555;border-top:1px solid #f5f5fb;vertical-align:middle;}
+.dtbl td:not(:first-child){text-align:right;}
+.tid{color:#ccc!important;font-size:8.5px!important;}.tnm{color:#1a1a2e!important;font-weight:700!important;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.trv{color:#16a34a!important;font-weight:700!important;}.trt{display:inline-flex;align-items:center;gap:2px;color:var(--yellow);font-size:8.5px;}
+.trt span{color:#888;font-size:8.5px;font-weight:600;}
+
+/* ═══ HERO TYPE ANIMATION ═══ */
+.hero-type-wrap{display:inline-flex;align-items:center;gap:14px;background:rgba(255,204,0,.06);border:1px solid rgba(255,204,0,.22);border-radius:8px;padding:4px 18px 4px 10px;position:relative;overflow:hidden;transition:border-color .4s,background .4s;}
+.hero-type-icon{width:46px;height:46px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .4s;}
+.hero-type-icon svg{width:26px;height:26px;color:#fff;}
+.hero-type-text{font-style:italic;font-weight:900;text-transform:uppercase;color:var(--yellow);text-shadow:0 0 40px rgba(255,204,0,.4);white-space:nowrap;position:relative;}
+.hero-type-text::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:3px;background:currentColor;border-radius:2px;opacity:.5;}
+
+/* Slide animation */
+@keyframes typeIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes typeOut{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(-18px);}}
+.type-entering{animation:typeIn .38s cubic-bezier(.22,1,.36,1) forwards;}
+.type-leaving{animation:typeOut .28s ease-in forwards;}
+
+/* ═══ FEATURES — new magazine layout ═══ */
+.features{padding:clamp(80px,10vw,130px) 20px;background:#fff;position:relative;overflow:hidden;}
+.features::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 0%,rgba(255,204,0,.04) 0%,transparent 60%);pointer-events:none;}
+.feat-header{text-align:center;margin-bottom:clamp(50px,7vw,80px);}
+.feat-header .eyebrow.lt{border-color:rgba(0,0,0,.08);}
+.feat-h2{font-size:clamp(32px,5vw,58px);font-weight:900;line-height:1.1;color:#111;margin-bottom:14px;letter-spacing:-1.5px;}
+.feat-h2 .hl-yellow-text{color:#111;position:relative;display:inline-block;}
+.feat-h2 .hl-yellow-text .hl-underline{position:absolute;bottom:-4px;left:-2px;right:-2px;height:6px;background:#FFCC00;border-radius:2px;transform:skewX(-8deg);}
+.feat-header-sub{font-size:15px;color:#777;font-weight:500;line-height:1.6;max-width:460px;margin:0 auto;}
+
+/* Scene layout */
+.feat-scene{max-width:1100px;margin:0 auto;position:relative;display:grid;grid-template-columns:220px 1fr 220px;gap:0;align-items:center;min-height:500px;}
+
+/* Left floating cards */
+.feat-col-left{display:flex;flex-direction:column;gap:16px;padding-right:20px;}
+.feat-col-right{display:flex;flex-direction:column;gap:16px;padding-left:20px;}
+
+/* Feature card - floating style */
+.fc{background:#fff;border:1px solid #EBEBEB;border-radius:16px;padding:20px 18px;box-shadow:0 2px 12px rgba(0,0,0,.05),0 1px 3px rgba(0,0,0,.04);transition:all .3s;cursor:default;position:relative;}
+.fc:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-3px);}
+.fc-ico{width:36px;height:36px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;color:#1a1a2e;}
+.fc-ico svg{width:22px;height:22px;}
+.fc h4{font-size:13px;font-weight:800;color:#111;margin-bottom:5px;letter-spacing:-.2px;}
+.fc p{font-size:11.5px;color:#888;line-height:1.55;font-weight:500;}
+
+/* Central phone mockup */
+.feat-phone-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;}
+
+/* Decorative number badge */
+.feat-num-badge{position:absolute;top:50%;left:-28px;transform:translateY(-50%);width:58px;height:58px;background:#111;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;font-style:italic;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:10;}
+
+/* Phone frame */
+.feat-phone{width:280px;background:#fff;border-radius:36px;box-shadow:0 24px 80px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.06);overflow:hidden;border:8px solid #111;position:relative;}
+.feat-phone-status{display:flex;justify-content:space-between;align-items:center;padding:12px 18px 4px;font-size:11px;font-weight:700;color:#111;}
+.feat-phone-nav{display:flex;align-items:center;justify-content:space-between;padding:4px 14px 10px;border-bottom:1px solid #f0f0f0;}
+.feat-phone-nav svg{width:14px;height:14px;color:#666;}
+.feat-phone-title{font-size:14px;font-weight:800;color:#111;padding:14px 18px 8px;}
+.feat-phone-body{padding:0 14px 16px;}
+
+/* Color picker row in phone */
+.feat-color-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;}
+.feat-color-tile{border-radius:10px;height:68px;display:flex;align-items:flex-end;padding:7px 8px;font-size:9px;font-weight:800;color:#fff;overflow:hidden;position:relative;}
+.feat-color-tile.selected{outline:2.5px solid #111;outline-offset:2px;}
+.feat-color-tile span{position:relative;z-index:1;}
+.feat-ph-options{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;}
+.feat-ph-opt{background:#F5F5F5;border-radius:8px;padding:10px 8px;text-align:center;}
+.feat-ph-opt-lbl{font-size:10px;font-weight:700;color:#888;margin-bottom:3px;}
+.feat-ph-opt-val{font-size:14px;font-weight:900;color:#111;}
+.feat-ph-font{font-size:22px;font-weight:700;color:#1C69D4;}
+.feat-ph-gradient{height:32px;border-radius:6px;background:linear-gradient(135deg,#7C3AED,#DC2626);margin-bottom:3px;}
+.feat-ph-slider{height:7px;border-radius:4px;background:linear-gradient(90deg,#7C3AED 0%,#DC2626 100%);position:relative;margin-top:6px;}
+.feat-ph-slider::after{content:'';position:absolute;right:30%;top:-3px;width:13px;height:13px;background:#fff;border-radius:50%;border:2.5px solid #7C3AED;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+
+/* Check badge floating on phone */
+.feat-check-badge{position:absolute;top:-10px;right:-14px;width:46px;height:46px;background:#111;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.35);z-index:10;}
+.feat-check-badge svg{width:24px;height:24px;color:#fff;}
+
+@media(max-width:960px){
+  .feat-scene{grid-template-columns:1fr 1fr;gap:24px;}
+  .feat-col-left,.feat-col-right{padding:0;}
+  .feat-phone-wrap{display:none;}
+}
+@media(max-width:640px){
+  .feat-scene{grid-template-columns:1fr;}
+  .feat-col-left,.feat-col-right{flex-direction:row;flex-wrap:wrap;}
+  .fc{flex:1 1 200px;}
+}
+
+/* ═══ USE CASES ═══ */
+.usecases{padding:clamp(70px,10vw,120px) 20px;background:var(--lt);border-top:1px solid rgba(0,0,0,.06);}
+.uc-wrap{max-width:1160px;margin:0 auto;}
+.uc-tabs{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap;justify-content:center;}
+.uc-tab{padding:9px 22px;border-radius:4px;font-size:11.5px;font-weight:700;font-style:italic;text-transform:uppercase;letter-spacing:.8px;cursor:pointer;border:1.5px solid rgba(0,0,0,.1);color:rgba(0,0,0,.45);transition:all .25s;transform:skewX(-8deg);background:#fff;}
+.uc-tab>span{display:inline-block;transform:skewX(8deg);}
+.uc-tab.on{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 6px 20px rgba(220,20,60,.3);}
+.uc-tab:hover:not(.on){border-color:var(--red);color:var(--red);}
+.uc-panels{position:relative;}
+.uc-panel{display:none;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center;}
+.uc-panel.on{display:grid;}
+.uc-label{display:inline-flex;align-items:center;gap:6px;background:var(--red);color:#fff;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;padding:4px 12px;border-radius:2px;margin-bottom:16px;}
+.uc-h2{font-size:clamp(24px,3.5vw,36px);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.5px;line-height:1.15;color:var(--txd);margin-bottom:16px;}
+.uc-p{font-size:14px;color:var(--txm);line-height:1.7;font-weight:500;margin-bottom:24px;}
+.uc-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.uc-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--txm);font-weight:500;}
+.uc-check{width:20px;height:20px;border-radius:4px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.uc-check svg{width:11px;height:11px;color:#fff;}
+.uc-mockup{background:var(--c1);border-radius:12px;padding:24px;border:1px solid var(--cb2);box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.uc-mock-bar{display:flex;gap:5px;margin-bottom:16px;}
+.uc-mock-dot{width:9px;height:9px;border-radius:50%;}
+.uc-mock-content{background:var(--c2);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:10px;}
+.uc-mock-row{display:flex;align-items:center;gap:10px;}
+.uc-mock-badge{padding:4px 10px;border-radius:3px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;}
+.uc-mock-line{height:5px;border-radius:2px;background:var(--c4);}
+.uc-mock-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.uc-mock-cell{background:var(--c3);border-radius:6px;padding:12px;text-align:center;}
+.uc-mock-num{font-size:16px;font-weight:900;font-style:italic;color:#fff;}
+.uc-mock-lbl{font-size:8px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:2px;}
+.uc-mock-prog{height:5px;background:var(--c4);border-radius:2px;margin-top:12px;overflow:hidden;}
+.uc-mock-prog-fill{height:100%;border-radius:2px;background:var(--gb);}
+
+/* ═══ BENEFITS ═══ */
+.benefits{padding:clamp(70px,10vw,120px) 20px;background:var(--c0);overflow:hidden;}
+.benefits-inner{max-width:1160px;margin:0 auto;}
+.ben-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;}
+.ben-left{}
+.ben-items{display:flex;flex-direction:column;gap:20px;margin-top:36px;}
+.ben-item{display:flex;gap:16px;padding:20px;background:var(--c2);border-radius:8px;border:1px solid var(--cb);transition:all .3s;cursor:pointer;}
+.ben-item:hover{border-color:var(--red);box-shadow:0 8px 28px rgba(220,20,60,.1);}
+.ben-item-ico{width:44px;height:44px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.ben-item-ico svg{width:22px;height:22px;color:#fff;}
+.ben-item-body h4{font-size:14px;font-weight:800;font-style:italic;text-transform:uppercase;color:#fff;margin-bottom:5px;}
+.ben-item-body p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6;font-weight:500;}
+.ben-right{position:relative;}
+.ben-visual{background:var(--c2);border-radius:14px;padding:28px;border:1px solid var(--cb2);box-shadow:0 30px 80px rgba(0,0,0,.6);}
+.ben-gauge{text-align:center;margin-bottom:24px;}
+.ben-gauge-svg{width:160px;height:90px;margin:0 auto;}
+.ben-gauge-pct{font-size:36px;font-weight:900;font-style:italic;color:#fff;margin-top:6px;letter-spacing:-2px;}
+.ben-gauge-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.4);margin-top:3px;}
+.ben-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.ben-stat{background:var(--c3);border-radius:7px;padding:14px;text-align:center;}
+.ben-stat-n{font-size:20px;font-weight:900;font-style:italic;letter-spacing:-1px;color:#fff;}
+.ben-stat-l{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.35);margin-top:3px;}
+.ben-float{position:absolute;background:var(--c2);border:1px solid var(--cb2);border-radius:8px;padding:10px 14px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.ben-float.f1{top:-20px;right:-20px;border-left:3px solid var(--red);}
+.ben-float.f2{bottom:-20px;left:-20px;border-left:3px solid var(--yellow);}
+.ben-float-sub{font-size:9px;color:rgba(255,255,255,.4);font-weight:500;margin-top:2px;}
+
+/* ═══ INTEGRATIONS ═══ */
+.integrations{padding:clamp(70px,10vw,120px) 20px;background:var(--c1);border-top:1px solid var(--cb);}
+.int-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:960px;margin:40px auto 0;}
+.int-card{background:var(--c2);border:1px solid var(--cb);border-radius:10px;padding:22px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:all .3s;}
+.int-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 12px 32px rgba(28,105,212,.18);}
+.int-logo{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.int-name{font-size:11px;font-weight:700;color:rgba(255,255,255,.65);text-align:center;}
+.int-badge{font-size:8.5px;font-weight:700;padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.5px;}
+.int-badge.new{background:rgba(255,204,0,.15);color:var(--yellow);}
+.int-badge.pop{background:rgba(28,105,212,.15);color:var(--blue);}
+.int-cta{text-align:center;margin-top:32px;color:rgba(255,255,255,.4);font-size:13px;font-weight:500;}
+.int-cta a{color:var(--blue);font-weight:700;transition:color .2s;}
+.int-cta a:hover{color:var(--yellow);}
+
+/* ═══ TESTIMONIALS ═══ */
+.testimonials{background:var(--lt);padding:clamp(70px,10vw,120px) 20px;border-top:4px solid var(--red);}
+.testi-wrap{max-width:1100px;margin:0 auto;}
+.testi-avatars{display:flex;justify-content:center;gap:10px;margin-bottom:40px;flex-wrap:wrap;}
+.tav{width:clamp(32px,5vw,40px);height:clamp(32px,5vw,40px);border-radius:4px;object-fit:cover;opacity:.4;filter:grayscale(1);transition:all .3s;transform:skewX(-8deg);cursor:pointer;}
+.tav.on{opacity:1;filter:grayscale(0);transform:skewX(-8deg) scale(1.12);border:2px solid var(--red);box-shadow:0 0 14px rgba(220,20,60,.4);}
+.testi-cars{display:flex;justify-content:center;gap:24px;align-items:stretch;flex-wrap:wrap;margin-bottom:36px;}
+.tcard{background:var(--ltS);border-radius:8px;padding:clamp(18px,4vw,32px) clamp(16px,3vw,26px);width:100%;max-width:370px;opacity:.38;transform:scale(.9);transition:all .4s;border:1px solid var(--ltB);display:flex;flex-direction:column;position:relative;}
+.tcard.on{opacity:1;transform:scale(1);border:1px solid rgba(220,20,60,.3);border-top:4px solid var(--red);box-shadow:0 18px 48px rgba(0,0,0,.08);z-index:2;}
+.tcard-seg{position:absolute;top:18px;left:18px;font-size:10px;font-weight:700;text-transform:uppercase;font-style:italic;color:var(--txm);display:flex;align-items:center;gap:5px;}
+.tcard-user{display:flex;flex-direction:column;align-items:center;margin-top:6px;margin-bottom:16px;}
+.tcard-user img{width:50px;height:50px;border-radius:4px;object-fit:cover;transform:skewX(-4deg);margin-bottom:9px;border:2px solid var(--ltB);}
+.tcard-user h4{font-size:14px;font-weight:800;font-style:italic;text-transform:uppercase;color:var(--txd);margin-bottom:2px;}
+.tcard-user p{font-size:11.5px;color:var(--txm);font-weight:500;}
+.tcard-stars{display:flex;align-items:center;gap:3px;color:var(--yellow);margin-bottom:14px;font-size:14px;}
+.tcard-stars span{color:var(--txd);font-size:12px;font-weight:800;margin-left:4px;}
+.tcard-q{font-size:13.5px;line-height:1.65;color:var(--txm);margin-bottom:22px;font-style:italic;font-weight:500;}
+.tcard-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;}
+.tcard-tags span{background:rgba(220,20,60,.07);color:var(--red);font-size:9.5px;font-weight:700;padding:4px 10px;border-radius:2px;text-transform:uppercase;transform:skewX(-8deg);}
+.testi-ctrls{display:flex;justify-content:center;gap:9px;}
+.tbtn{width:40px;height:40px;border-radius:4px;background:var(--ltS);border:1px solid var(--ltB);color:var(--txd);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;transform:skewX(-8deg);}
+.tbtn:hover{background:var(--red);border-color:var(--red);color:#fff;}
+.tbtn svg{transform:skewX(8deg);}
+
+/* ═══ PRICING ═══ */
+.pricing{padding:clamp(70px,10vw,120px) 20px;background:var(--c0);}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:960px;margin:40px auto 0;}
+.pcard{background:var(--c2);border:1px solid var(--cb2);border-radius:12px;padding:30px 26px;text-align:left;position:relative;transition:transform .3s;}
+.pcard:hover{transform:translateY(-6px);}
+.pcard.hot{border-color:var(--red);border-top:3px solid var(--red);}
+.ppop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gr);color:#fff;font-size:9.5px;font-weight:800;font-style:italic;text-transform:uppercase;padding:4px 16px;border-radius:20px;letter-spacing:1px;white-space:nowrap;}
+.ptier{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.35);margin-bottom:10px;}
+.pprice{font-size:36px;font-weight:900;color:#fff;letter-spacing:-2px;line-height:1;}
+.pprice sub{font-size:15px;font-weight:700;letter-spacing:0;vertical-align:bottom;margin-right:1px;}
+.pprice span{font-size:13px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:0;}
+.pdesc{font-size:12.5px;color:rgba(255,255,255,.4);margin:10px 0 20px;line-height:1.6;}
+.pdiv{height:1px;background:var(--cb2);margin-bottom:18px;}
+.pfeats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px;}
+.pfeats li{display:flex;align-items:center;gap:9px;font-size:12.5px;color:rgba(255,255,255,.6);font-weight:500;}
+.pfeats li.off{color:rgba(255,255,255,.22);}
+.pck{width:16px;height:16px;border-radius:3px;background:#EDFBF2;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pck svg{width:9px;height:9px;color:#16a34a;}
+.pxk{width:16px;height:16px;border-radius:3px;background:var(--c4);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pxk svg{width:9px;height:9px;color:rgba(255,255,255,.2);}
+.pbtn{display:block;text-align:center;padding:13px;border-radius:6px;font-size:12px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:all .3s;font-family:var(--font);border:none;}
+.pbtn.outl{background:transparent;border:1.5px solid var(--cb2);color:rgba(255,255,255,.55);}
+.pbtn.outl:hover{border-color:#fff;color:#fff;}
+.pbtn.prim{background:var(--gr);color:#fff;box-shadow:0 6px 20px rgba(220,20,60,.35);}
+.pbtn.prim:hover{box-shadow:0 10px 30px rgba(220,20,60,.55);transform:translateY(-1px);}
+.pricing-faq{text-align:center;margin-top:28px;color:rgba(255,255,255,.35);font-size:13px;font-weight:500;}
+.pricing-faq a{color:var(--blue);font-weight:700;transition:color .2s;}
+.pricing-faq a:hover{color:var(--yellow);}
+
+/* ═══ BLOG ═══ */
+.blog{padding:clamp(70px,10vw,120px) 20px;background:var(--c1);border-top:1px solid var(--cb);}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:40px auto 0;}
+.blog-card{background:var(--c2);border:1px solid var(--cb);border-radius:10px;overflow:hidden;transition:all .3s;cursor:pointer;}
+.blog-card:hover{transform:translateY(-5px);border-color:var(--cb2);box-shadow:0 16px 40px rgba(0,0,0,.4);}
+.blog-thumb{height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.blog-thumb-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.blog-cat{position:absolute;top:14px;left:14px;background:var(--gr);color:#fff;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:4px 10px;border-radius:2px;}
+.blog-body{padding:20px;}
+.blog-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;color:rgba(255,255,255,.35);font-size:10.5px;font-weight:600;}
+.blog-meta-dot{width:3px;height:3px;background:rgba(255,255,255,.25);border-radius:50%;}
+.blog-title{font-size:15px;font-weight:800;font-style:italic;text-transform:uppercase;color:#fff;line-height:1.3;margin-bottom:10px;letter-spacing:-.3px;}
+.blog-excerpt{font-size:12.5px;color:rgba(255,255,255,.45);line-height:1.6;font-weight:500;margin-bottom:16px;}
+.blog-link{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;transition:gap .2s;}
+.blog-card:hover .blog-link{gap:9px;}
+.blog-link svg{width:12px;height:12px;}
+.blog-cta{text-align:center;margin-top:36px;}
+
+/* ═══ CONTACT ═══ */
+.contact{background:var(--c2);padding:clamp(70px,10vw,110px) 20px clamp(80px,12vw,140px);border-top:1px solid var(--cb);}
+.contact-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(40px,7vw,90px);align-items:start;}
+.contact-left{}
+.contact-left .sec-sub{margin-top:14px;margin-bottom:32px;}
+.con-items{display:flex;flex-direction:column;gap:16px;}
+.con-item{display:flex;align-items:center;gap:12px;}
+.con-ico{width:40px;height:40px;border-radius:6px;transform:skewX(-8deg);background:var(--c3);border:1px solid var(--cb2);display:flex;justify-content:center;align-items:center;flex-shrink:0;}
+.con-ico svg{transform:skewX(8deg);width:18px;height:18px;color:var(--red);}
+.con-info h5{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.4);margin-bottom:2px;}
+.con-info p{font-size:13.5px;font-weight:700;color:#fff;}
+.con-stepper{display:flex;flex-direction:column;gap:16px;margin-top:32px;position:relative;}
+.con-stepper::before{content:'';position:absolute;left:19px;top:4px;bottom:4px;width:2px;background:var(--cb2);z-index:0;}
+.con-step{display:flex;align-items:center;gap:12px;position:relative;z-index:1;}
+.con-step-ico{width:40px;height:40px;border-radius:5px;transform:skewX(-8deg);background:var(--c0);border:2px solid var(--cb2);display:flex;justify-content:center;align-items:center;color:rgba(255,255,255,.3);transition:all .3s;flex-shrink:0;}
+.con-step-ico svg{transform:skewX(8deg);width:18px;height:18px;}
+.con-step-txt{font-size:12px;font-weight:700;text-transform:uppercase;font-style:italic;color:rgba(255,255,255,.3);}
+.con-step.on .con-step-ico{border-color:var(--red);color:var(--red);box-shadow:0 0 16px rgba(220,20,60,.25);background:rgba(220,20,60,.08);}
+.con-step.on .con-step-txt{color:#fff;}
+.con-line{position:absolute;left:19px;top:0;width:2px;background:var(--red);box-shadow:0 0 8px var(--red);transition:height .5s;z-index:2;}
+.contact-form{background:var(--c0);padding:clamp(24px,4vw,40px);border-radius:10px;border:1px solid var(--cb2);box-shadow:0 20px 50px rgba(0,0,0,.5);border-top:4px solid var(--blue);}
+.contact-form h3{font-size:clamp(20px,3vw,26px);font-weight:900;font-style:italic;text-transform:uppercase;color:#fff;margin-bottom:28px;letter-spacing:-.3px;}
+.fg{margin-bottom:18px;}
+.fg label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:6px;letter-spacing:.5px;}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--c3);border:1px solid var(--cb2);border-radius:5px;padding:13px 14px;color:#f0f0f0;font-family:var(--font);font-size:13.5px;font-weight:500;transition:border-color .3s,box-shadow .3s;outline:none;resize:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,105,212,.12);}
+.fg select option{background:var(--c3);}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-sub{width:100%;background:var(--gr);color:#fff;border:none;padding:16px;border-radius:5px;font-size:14px;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:1.5px;font-family:var(--font);cursor:pointer;transition:all .3s;margin-top:6px;transform:skewX(-8deg);box-shadow:0 6px 20px rgba(220,20,60,.3);}
+.form-sub>span{display:inline-block;transform:skewX(8deg);}
+.form-sub:hover{background:var(--gy);color:var(--txd);transform:skewX(-8deg) translateY(-2px);box-shadow:0 12px 28px rgba(255,204,0,.35);}
+
+/* ═══ FOOTER ═══ */
+.footer{background:var(--c0);border-top:1px solid var(--cb2);padding:clamp(50px,7vw,80px) 20px clamp(24px,3vw,36px);}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:clamp(40px,5vw,56px);}
+.footer-brand .sec-sub{margin-top:14px;margin-bottom:22px;font-size:12.5px;}
+.footer-logo-wrap{display:flex;align-items:center;gap:10px;}
+.fl-box{border:1.5px solid rgba(255,255,255,.7);padding:3px 9px;border-radius:2px;}
+.fl-box span{font-size:15px;font-weight:900;font-style:italic;letter-spacing:3px;color:#fff;}
+.footer-socials{display:flex;gap:8px;}
+.fsoc{width:34px;height:34px;border-radius:5px;background:var(--c2);border:1px solid var(--cb2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);transition:all .2s;cursor:pointer;}
+.fsoc:hover{background:var(--red);border-color:var(--red);color:#fff;}
+.fsoc svg{width:14px;height:14px;}
+.fcol h5{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.5);margin-bottom:14px;}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.fcol a{font-size:12.5px;color:rgba(255,255,255,.32);font-weight:500;transition:color .2s;}
+.fcol a:hover{color:rgba(255,255,255,.85);}
+.footer-bot{border-top:1px solid var(--cb);padding-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-size:11.5px;color:rgba(255,255,255,.22);font-weight:500;}
+.footer-badges{display:flex;gap:7px;}
+.fbadge{background:var(--c2);border:1px solid var(--cb2);padding:4px 11px;border-radius:3px;font-size:9.5px;font-weight:700;color:rgba(255,255,255,.28);transform:skewX(-7deg);}
+.fbadge span{display:inline-block;transform:skewX(7deg);}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .feat-grid{grid-template-columns:repeat(2,1fr);}
+  .pricing-grid{grid-template-columns:1fr 1fr;}
+  .int-grid{grid-template-columns:repeat(4,1fr);}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .ben-grid{grid-template-columns:1fr;}
+  .ben-float{display:none;}
+  .contact-inner{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .nav-hbg{display:flex;}
+  .nav-soc{display:none;}
+}
+@media(max-width:768px){
+  .feat-grid{grid-template-columns:1fr;}
+  .uc-panel.on{grid-template-columns:1fr;}
+  .uc-mockup{display:none;}
+  .testi-cars{flex-direction:column;align-items:center;}
+  .tcard{display:none;max-width:100%;}
+  .tcard.on{display:flex;}
+  .tavi-row{display:none;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .blog-grid{grid-template-columns:1fr;}
+  .fg-row{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .dash{height:360px;}
+  .dsb{width:140px;}
+  .dash-kpis{grid-template-columns:1fr 1fr;}
+  .dash-mid{grid-template-columns:1fr;}
+  .dash-bot{grid-template-columns:1fr;}
+  .int-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:480px){
+  .hero-h1{font-size:clamp(26px,8vw,40px);}
+  .hero-acts{flex-direction:column;align-items:center;width:100%;}
+  .btn-r,.btn-o{width:100%;text-align:center;}
+  .uc-tabs{gap:6px;}
+  .uc-tab{font-size:10px;padding:7px 14px;}
+  .ben-stats-row{grid-template-columns:1fr;}
+  .int-grid{grid-template-columns:repeat(2,1fr);}
+  .dash{display:none;}
+  .stats-band-inner{grid-template-columns:1fr 1fr;}
+}
+
+/* Stats band */
+.stats-band{background:var(--red);padding:clamp(28px,4vw,44px) 20px;}
+.stats-band-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.stat-item{text-align:center;position:relative;}
+.stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);height:50%;width:1px;background:rgba(255,255,255,.25);}
+.stat-n{font-size:clamp(26px,4vw,42px);font-weight:900;font-style:italic;color:#fff;line-height:1;letter-spacing:-2px;}
+.stat-n sup{font-size:.5em;vertical-align:top;margin-top:.3em;letter-spacing:0;}
+.stat-l{font-size:clamp(10px,1.4vw,12px);color:rgba(255,255,255,.72);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-top:5px;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════
+     NAVBAR
+═══════════════════════════════ -->
+<div class="nav-wrap">
+  <nav class="nav-bar" id="navbar">
+    <div class="nav-logo">
+      <div class="logo-tri"></div>
+      <div class="logo-box">
+        <span class="logo-main">AUTOTECH</span>
+        <span class="logo-sub">SISTEMAS</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <ul>
+        <li><a href="#hero">Início</a></li>
+        <li><a href="#features">Recursos <i class="nav-ch"></i></a></li>
+        <li><a href="#usecases">Casos de Uso</a></li>
+        <li><a href="#benefits">Benefícios</a></li>
+        <li><a href="#integrations">Integrações</a></li>
+        <li><a href="#pricing">Planos</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contato</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-soc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" class="nav-soc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Falar com Especialista</button>
+      <button class="nav-hbg" id="hambtn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</div>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMenu()">✕</button>
+  <a href="#hero" onclick="toggleMenu()">Início</a>
+  <a href="#features" onclick="toggleMenu()">Recursos</a>
+  <a href="#usecases" onclick="toggleMenu()">Casos de Uso</a>
+  <a href="#benefits" onclick="toggleMenu()">Benefícios</a>
+  <a href="#integrations" onclick="toggleMenu()">Integrações</a>
+  <a href="#pricing" onclick="toggleMenu()">Planos</a>
+  <a href="#blog" onclick="toggleMenu()">Blog</a>
+  <a href="#contact" onclick="toggleMenu()">Contato</a>
+  <button class="mob-cta" onclick="toggleMenu();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Começar Grátis</button>
+</div>
+
+<!-- ═══════════════════════════════
+     HERO
+═══════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><div class="badge-dot"></div>Tecnologia #1 para o mercado automotivo brasileiro</div>
+    <h1 class="hero-h1 rt">Software sob medida<br>para a sua<br>
+      <span class="hero-type-wrap" id="heroTypeWrap">
+        <span class="hero-type-icon" id="heroTypeIcon">
+          <!-- icon injected by JS -->
+        </span>
+        <span class="hero-type-text" id="heroTypeText">oficina mecânica</span>
+      </span>
+    </h1>
+    <p class="hero-sub">Controle ordens de serviço, estoque, clientes e finanças em um único painel inteligente. Do box da oficina ao relatório gerencial.</p>
+    <div class="hero-acts">
+      <a href="#contact" class="btn-r"><span>Começar Grátis — 14 dias</span></a>
+      <a href="#features" class="btn-o"><span>Ver Demonstração →</span></a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-n">12K+</div><div class="hero-stat-l">Oficinas Ativas</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">98%</div><div class="hero-stat-l">Satisfação</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">3.2M</div><div class="hero-stat-l">OS Processadas</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">24/7</div><div class="hero-stat-l">Suporte</div></div>
+    </div>
+  </div>
+
+  <!-- Dashboard Component -->
+  <div class="hero-dash-wrap">
+    <div class="dash">
+      <aside class="dsb">
+        <div class="dsb-logo"><div class="dsb-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div><span class="dsb-lt">Autotech</span></div>
+        <nav class="dsb-nav">
+          <div class="dsb-i on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</div>
+          <div class="dsb-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Ordens OS<span class="dsb-badge">46</span></div>
+          <div class="dsb-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Estoque</div>
+          <div class="dsb-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clientes</div>
+          <div class="dsb-i" style="margin-top:6px;border-top:1px solid #f0f0f8;padding-top:8px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Financeiro</div>
+          <div class="dsb-sub"><div class="dsb-si">Faturas</div><div class="dsb-si">Transações</div><div class="dsb-si">Relatórios</div></div>
+          <div class="dsb-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Analytics</div>
+          <div class="dsb-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="9.5" r="5.5"/><polyline points="14.5 4.5 22 4.5 22 12"/><line x1="15" y1="9" x2="22" y2="4.5"/></svg>Descontos</div>
+        </nav>
+        <div class="dsb-up"><h5>⚡ Upgrade!</h5><p>Desbloqueie recursos avançados.</p><div class="dsb-upb">Fazer upgrade</div></div>
+      </aside>
+      <div class="dash-main">
+        <div class="dash-top">
+          <div class="dash-srch"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Buscar..." readonly><span class="dash-kbd">⌘K</span></div>
+          <div class="dash-tr"><div class="dash-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dash-nd"></span></div><div class="dash-av">AT</div></div>
+        </div>
+        <div class="dash-body">
+          <div class="dash-ph"><h1>Dashboard</h1><div class="dash-ha"><div class="dash-db"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Jan–Fev 2025</div><div class="dash-db">Últimos 30 dias ▾</div><button class="dash-ex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar</button></div></div>
+          <div class="dash-kpis">
+            <div class="dash-kpi"><div class="dash-kh"><span class="dash-kl">Page Views</span><div class="dash-ki kb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div></div><div class="dash-kv">16,431</div><span class="dup">▲ 15,5% <span class="dvs">vs. anterior</span></span></div>
+            <div class="dash-kpi"><div class="dash-kh"><span class="dash-kl">Visitantes</span><div class="dash-ki kg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div></div><div class="dash-kv">6,225</div><span class="dup">▲ 8,4% <span class="dvs">vs. anterior</span></span></div>
+            <div class="dash-kpi"><div class="dash-kh"><span class="dash-kl">Cliques</span><div class="dash-ki kr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div><div class="dash-kv">2,832</div><span class="ddn">▼ 10,5% <span class="dvs">vs. anterior</span></span></div>
+            <div class="dash-kpi"><div class="dash-kh"><span class="dash-kl">Ordens</span><div class="dash-ki ko"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div></div><div class="dash-kv">1,224</div><span class="dup">▲ 4,4% <span class="dvs">vs. anterior</span></span></div>
+          </div>
+          <div class="dash-mid">
+            <div class="dcard"><div class="dct">Lucro Total</div><div class="dcv">R$446,7K</div><div class="dcb">▲ 24,4% vs. período anterior</div>
+              <svg class="dspk" viewBox="0 0 300 72" preserveAspectRatio="none"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1C69D4" stop-opacity=".25"/><stop offset="100%" stop-color="#1C69D4" stop-opacity="0"/></linearGradient></defs><line x1="0" y1="58" x2="300" y2="58" stroke="#f0f0f8" stroke-width="1"/><line x1="0" y1="40" x2="300" y2="40" stroke="#f0f0f8" stroke-width="1"/><line x1="0" y1="22" x2="300" y2="22" stroke="#f0f0f8" stroke-width="1"/><path d="M0,58 C16,54 32,46 50,41 C68,36 86,38 102,34 C118,30 132,24 150,16 C168,8 184,22 200,28 C216,34 232,18 248,10 C264,2 282,8 300,5 L300,72 L0,72Z" fill="url(#cg)"/><path d="M0,58 C16,54 32,46 50,41 C68,36 86,38 102,34 C118,30 132,24 150,16 C168,8 184,22 200,28 C216,34 232,18 248,10 C264,2 282,8 300,5" fill="none" stroke="#1C69D4" stroke-width="2.5" stroke-linecap="round"/><circle cx="150" cy="16" r="4" fill="#1C69D4" stroke="#fff" stroke-width="2"/><rect x="110" y="1" width="82" height="16" rx="4" fill="#1a1a2e"/><text x="151" y="12" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8" font-weight="700" fill="#fff">R$12.324 este mês</text><text x="3" y="70" font-family="Montserrat,sans-serif" font-size="7" fill="#ccc">1 Jan</text><text x="66" y="70" font-family="Montserrat,sans-serif" font-size="7" fill="#ccc">8 Jan</text><text x="133" y="70" font-family="Montserrat,sans-serif" font-size="7" fill="#ccc">15 Jan</text><text x="200" y="70" font-family="Montserrat,sans-serif" font-size="7" fill="#ccc">22 Jan</text><text x="266" y="70" font-family="Montserrat,sans-serif" font-size="7" fill="#ccc">29 Jan</text></svg>
+            </div>
+            <div class="dcard"><div class="dbh"><span class="dct">Dia Mais Ativo</span><span style="color:#ccc;font-size:14px;cursor:pointer">···</span></div><div style="text-align:center;font-size:12px;font-weight:900;color:#1a1a2e;margin-bottom:5px;">8,162</div><div class="dbars"><div class="dbc"><div class="dbf" style="height:40%"></div><span class="dbd">D</span></div><div class="dbc"><div class="dbf" style="height:55%"></div><span class="dbd">S</span></div><div class="dbc"><div class="dbf on" style="height:100%"></div><span class="dbd on">T</span></div><div class="dbc"><div class="dbf" style="height:65%"></div><span class="dbd">Q</span></div><div class="dbc"><div class="dbf" style="height:50%"></div><span class="dbd">Q</span></div><div class="dbc"><div class="dbf" style="height:78%"></div><span class="dbd">S</span></div><div class="dbc"><div class="dbf" style="height:42%"></div><span class="dbd">S</span></div></div></div>
+          </div>
+          <div class="dash-bot">
+            <div class="dcard"><div style="display:flex;align-items:center;justify-content:space-between"><span class="dct">Clientes</span><span style="color:#ccc;font-size:14px;cursor:pointer">···</span></div><div class="dsegs"><div class="dseg ds-b"><div class="dseg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="dseg-v">2,884</div><div class="dseg-l">Revendedores</div></div><div class="dseg ds-g"><div class="dseg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="dseg-v">1,432</div><div class="dseg-l">Distribuidores</div></div><div class="dseg ds-o"><div class="dseg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="dseg-v">562</div><div class="dseg-l">Atacadistas</div></div></div></div>
+            <div class="dcard" style="overflow:hidden"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px"><span class="dct">Melhores Produtos</span><span style="color:#ccc;font-size:14px;cursor:pointer">···</span></div><table class="dtbl"><thead><tr><th>ID</th><th>Produto</th><th>Qtd</th><th>Receita</th><th>★</th></tr></thead><tbody><tr><td class="tid">#83009</td><td class="tnm">Filtro K&N</td><td>2.310</td><td class="trv">R$124K</td><td><span class="trt">★<span>5.0</span></span></td></tr><tr><td class="tid">#83001</td><td class="tnm">Óleo Mobil 5W30</td><td>1.230</td><td class="trv">R$92K</td><td><span class="trt">★<span>4.8</span></span></td></tr><tr><td class="tid">#83004</td><td class="tnm">Kit Embreagem</td><td>812</td><td class="trv">R$74K</td><td><span class="trt">★<span>4.7</span></span></td></tr><tr><td class="tid">#83002</td><td class="tnm">Pastilha Cobreq</td><td>645</td><td class="trv">R$62K</td><td><span class="trt">★<span>4.5</span></span></td></tr></tbody></table></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Band -->
+<div class="stats-band">
+  <div class="stats-band-inner">
+    <div class="stat-item"><div class="stat-n">12<sup>K+</sup></div><div class="stat-l">Oficinas Ativas</div></div>
+    <div class="stat-item"><div class="stat-n">98<sup>%</sup></div><div class="stat-l">Satisfação</div></div>
+    <div class="stat-item"><div class="stat-n">3.2<sup>M</sup></div><div class="stat-l">OS Processadas</div></div>
+    <div class="stat-item"><div class="stat-n">24<sup>/7</sup></div><div class="stat-l">Suporte Dedicado</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     FEATURES
+═══════════════════════════════ -->
+<section class="features" id="features">
+  <div class="feat-header">
+    <div class="eyebrow lt"><span>Recursos</span></div>
+    <h2 class="feat-h2">Recursos poderosos<br>na ponta dos seus <span class="hl-yellow-text">dedos<span class="hl-underline"></span></span></h2>
+    <p class="feat-header-sub">Acesso instantâneo a ferramentas, templates e ações para um fluxo de trabalho simplificado na sua gestão.</p>
+  </div>
+
+  <div class="feat-scene">
+    <!-- Left cards -->
+    <div class="feat-col-left">
+      <div class="fc">
+        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h4>Ordens de Serviço</h4>
+        <p>Mantenha-se organizado com rastreamento interativo das suas OS em tempo real.</p>
+      </div>
+      <div class="fc">
+        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <h4>Painel de Controle</h4>
+        <p>Brainstorm e planejamento visual interativo com dados em tempo real.</p>
+      </div>
+      <div class="fc">
+        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h4>Financeiro</h4>
+        <p>Gerencie faturas, fluxo de caixa e relatórios com clareza total.</p>
+      </div>
+    </div>
+
+    <!-- Central phone mockup -->
+    <div class="feat-phone-wrap">
+      <div class="feat-num-badge">24</div>
+      <div style="position:relative;">
+        <div class="feat-check-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="feat-phone">
+          <div class="feat-phone-status">
+            <span>9:41</span>
+            <span style="display:flex;align-items:center;gap:3px;font-size:9px;">
+              <svg width="12" height="10" viewBox="0 0 20 14" fill="#111"><rect x="0" y="4" width="3" height="10" rx="1"/><rect x="4" y="2" width="3" height="12" rx="1"/><rect x="8" y="0" width="3" height="14" rx="1"/><rect x="12" y="3" width="3" height="11" rx="1" opacity=".35"/></svg>
+              <svg width="13" height="10" viewBox="0 0 20 15" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 C5 3.5 15 3.5 18.5 7.5"/><path d="M4 10.5 C6.5 7.5 13.5 7.5 16 10.5"/><circle cx="10" cy="14" r="1.5" fill="#111" stroke="none"/></svg>
+              <svg width="20" height="10" viewBox="0 0 28 14" fill="#111"><rect x="0" y="1" width="23" height="12" rx="2"/><rect x="24" y="4" width="4" height="6" rx="1" opacity=".5"/><rect x="1" y="2" width="19" height="10" rx="1.5" fill="#111"/></svg>
+            </span>
+          </div>
+          <div class="feat-phone-nav">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            <div style="display:flex;gap:12px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </div>
+          </div>
+          <div class="feat-phone-title">Revisão Toyota Corolla 2025</div>
+          <div style="height:2px;background:#f0f0f0;margin:0 18px 12px;border-radius:1px;"></div>
+          <div class="feat-phone-body">
+            <!-- Color section -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;border-bottom:1px solid #f5f5f5;padding-bottom:10px;">
+              <div style="text-align:center;">
+                <div style="font-size:10px;font-weight:700;color:#1C69D4;margin-bottom:4px;">Cor do texto</div>
+                <div style="width:28px;height:28px;border-radius:6px;background:#111;margin:0 auto;border:2px solid #eee;"></div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:10px;font-weight:700;color:#555;margin-bottom:4px;">Fonte</div>
+                <div style="font-size:20px;font-weight:700;color:#111;">Aa</div>
+              </div>
+            </div>
+            <!-- Status tiles -->
+            <div class="feat-color-row">
+              <div class="feat-color-tile" style="background:linear-gradient(135deg,#e8d5f0,#f5e6ff);"><span style="color:#9333ea;font-size:8.5px;font-weight:800;">Revisão</span></div>
+              <div class="feat-color-tile selected" style="background:linear-gradient(135deg,#86efac,#22c55e);"><span style="color:#fff;font-size:8.5px;font-weight:800;">Concluído</span></div>
+              <div class="feat-color-tile" style="background:linear-gradient(135deg,#fde68a,#f59e0b);"><span style="color:#fff;font-size:8.5px;font-weight:800;">Aguardando</span></div>
+            </div>
+            <!-- Sliders -->
+            <div style="margin-top:10px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:9px;color:#888;font-weight:700;">Cor do doc</span></div>
+              <div style="height:7px;border-radius:4px;background:linear-gradient(90deg,#7C3AED,#DC2626);position:relative;margin-bottom:8px;">
+                <div style="position:absolute;right:20%;top:-3px;width:13px;height:13px;background:#fff;border-radius:50%;border:2.5px solid #7C3AED;box-shadow:0 1px 4px rgba(0,0,0,.2);"></div>
+              </div>
+              <div style="height:7px;border-radius:4px;background:linear-gradient(90deg,#3B82F6,#06B6D4);position:relative;">
+                <div style="position:absolute;right:35%;top:-3px;width:13px;height:13px;background:#fff;border-radius:50%;border:2.5px solid #3B82F6;box-shadow:0 1px 4px rgba(0,0,0,.2);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right cards -->
+    <div class="feat-col-right">
+      <div class="fc">
+        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+        <h4>Aprovação Digital</h4>
+        <p>Insira e compartilhe orçamentos com link mágico para aprovação do cliente.</p>
+      </div>
+      <div class="fc">
+        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <h4>Tabelas e Estoque</h4>
+        <p>Insira e personalize tabelas de peças de forma muito mais clara e organizada.</p>
+      </div>
+      <div class="fc">
+        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h4>NF-e Integrada</h4>
+        <p>Emita Notas Fiscais eletrônicas diretamente pelo painel, integrado com SEFAZ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     USE CASES
+═══════════════════════════════ -->
+<section class="usecases" id="usecases">
+  <div class="uc-wrap">
+    <div class="sec-hdr">
+      <div class="eyebrow lt"><span>Casos de Uso</span></div>
+      <h2 class="sec-title rt dk">Feito para cada tipo<br>de <span style="color:var(--red);">negócio automotivo</span></h2>
+      <p class="sec-sub dk">Seja sua oficina pequena ou uma rede de concessionárias, o Autotech se adapta ao seu fluxo de trabalho.</p>
+    </div>
+    <div class="uc-tabs">
+      <div class="uc-tab on" onclick="switchTab('oficina',this)"><span>🔧 Oficina Mecânica</span></div>
+      <div class="uc-tab" onclick="switchTab('concessionaria',this)"><span>🏎️ Concessionária</span></div>
+      <div class="uc-tab" onclick="switchTab('autopecas',this)"><span>📦 Loja de Autopeças</span></div>
+      <div class="uc-tab" onclick="switchTab('estetica',this)"><span>✨ Estética Automotiva</span></div>
+    </div>
+    <div class="uc-panels">
+      <div class="uc-panel on" id="uc-oficina">
+        <div>
+          <div class="uc-label">🔧 Oficina Mecânica</div>
+          <h2 class="uc-h2">Gerencie cada box com precisão cirúrgica</h2>
+          <p class="uc-p">Controle quantos veículos estão em cada box, distribua mecânicos, gerencie o tempo de cada serviço e entregue o carro no prazo prometido.</p>
+          <ul class="uc-list">
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Distribuição automática de mecânicos por OS</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Cronômetro por serviço com alertas de atraso</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Checklist digital de inspeção veicular</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Aprovação de orçamentos por WhatsApp</li>
+          </ul>
+          <a href="#contact" class="btn-dk"><span>Ver demonstração →</span></a>
+        </div>
+        <div class="uc-mockup">
+          <div class="uc-mock-bar"><div class="uc-mock-dot" style="background:#ff5f57"></div><div class="uc-mock-dot" style="background:#febc2e"></div><div class="uc-mock-dot" style="background:#28c840"></div></div>
+          <div class="uc-mock-content">
+            <div style="font-size:11px;font-weight:800;font-style:italic;text-transform:uppercase;color:#fff;margin-bottom:12px;letter-spacing:-.2px;">ORDEM #8341 — GOL G6</div>
+            <div class="uc-mock-grid">
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:var(--yellow);">04</div><div class="uc-mock-lbl">Peças Usadas</div></div>
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:#4ade80;">2h30</div><div class="uc-mock-lbl">Tempo OS</div></div>
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:var(--blue);">R$380</div><div class="uc-mock-lbl">Valor Total</div></div>
+            </div>
+            <div style="margin-top:14px;display:flex;flex-direction:column;gap:7px;">
+              <div class="uc-mock-row"><div class="uc-mock-badge" style="background:rgba(255,204,0,.15);color:var(--yellow);">EM ANDAMENTO</div><div class="uc-mock-line" style="flex:1;height:4px;"></div></div>
+              <div class="uc-mock-prog"><div class="uc-mock-prog-fill" style="width:72%;background:linear-gradient(90deg,var(--blue),var(--yellow));"></div></div>
+              <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,.4);display:flex;justify-content:space-between;"><span>Início: 09:15</span><span>72% concluído</span><span>Prev: 12:00</span></div>
+            </div>
+            <div style="margin-top:12px;display:flex;gap:6px;">
+              <div style="flex:1;background:rgba(220,20,60,.12);border:1px solid rgba(220,20,60,.2);border-radius:5px;padding:8px;text-align:center;font-size:9px;font-weight:700;color:var(--red);cursor:pointer;">Pausar OS</div>
+              <div style="flex:1;background:rgba(28,105,212,.15);border:1px solid rgba(28,105,212,.25);border-radius:5px;padding:8px;text-align:center;font-size:9px;font-weight:700;color:var(--blue);cursor:pointer;">Enviar para Cliente</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uc-panel" id="uc-concessionaria">
+        <div>
+          <div class="uc-label">🏎️ Concessionária</div>
+          <h2 class="uc-h2">Gestão completa de vendas e pós-venda</h2>
+          <p class="uc-p">Controle estoque de veículos novos e seminovos, funil de vendas, revisões programadas e relacionamento com o cliente ao longo de todo o ciclo de vida.</p>
+          <ul class="uc-list">
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Funil de vendas integrado com CRM</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Revisões programadas por quilometragem</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Gestão de garantia e recall automático</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Relatórios de desempenho por vendedor</li>
+          </ul>
+          <a href="#contact" class="btn-dk"><span>Ver demonstração →</span></a>
+        </div>
+        <div class="uc-mockup">
+          <div class="uc-mock-bar"><div class="uc-mock-dot" style="background:#ff5f57"></div><div class="uc-mock-dot" style="background:#febc2e"></div><div class="uc-mock-dot" style="background:#28c840"></div></div>
+          <div class="uc-mock-content">
+            <div style="font-size:11px;font-weight:800;font-style:italic;text-transform:uppercase;color:#fff;margin-bottom:12px;">FUNIL DE VENDAS — JAN 2025</div>
+            <div class="uc-mock-grid">
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:var(--yellow);">48</div><div class="uc-mock-lbl">Leads</div></div>
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:var(--blue);">23</div><div class="uc-mock-lbl">Negociando</div></div>
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:#4ade80;">12</div><div class="uc-mock-lbl">Fechados</div></div>
+            </div>
+            <div style="margin-top:14px;display:flex;flex-direction:column;gap:5px;">
+              <div style="height:18px;background:linear-gradient(90deg,rgba(255,204,0,.3),transparent);border-radius:3px;width:100%;display:flex;align-items:center;padding:0 8px;font-size:8px;font-weight:700;color:var(--yellow);">Prospecção</div>
+              <div style="height:18px;background:linear-gradient(90deg,rgba(28,105,212,.3),transparent);border-radius:3px;width:72%;display:flex;align-items:center;padding:0 8px;font-size:8px;font-weight:700;color:var(--blue);">Proposta</div>
+              <div style="height:18px;background:linear-gradient(90deg,rgba(74,222,128,.3),transparent);border-radius:3px;width:45%;display:flex;align-items:center;padding:0 8px;font-size:8px;font-weight:700;color:#4ade80;">Fechamento</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uc-panel" id="uc-autopecas">
+        <div>
+          <div class="uc-label">📦 Loja de Autopeças</div>
+          <h2 class="uc-h2">Estoque inteligente, vendas mais rápidas</h2>
+          <p class="uc-p">Gerencie múltiplos catálogos, preços por tabela, pedidos de compra automáticos e integração com os principais fornecedores do mercado.</p>
+          <ul class="uc-list">
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Consulta de peças por código OEM e FIPE</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Pedido automático ao atingir estoque mínimo</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Tabela de preços dinâmica por cliente/canal</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>PDV integrado com emissão de NF-e</li>
+          </ul>
+          <a href="#contact" class="btn-dk"><span>Ver demonstração →</span></a>
+        </div>
+        <div class="uc-mockup">
+          <div class="uc-mock-bar"><div class="uc-mock-dot" style="background:#ff5f57"></div><div class="uc-mock-dot" style="background:#febc2e"></div><div class="uc-mock-dot" style="background:#28c840"></div></div>
+          <div class="uc-mock-content">
+            <div style="font-size:11px;font-weight:800;font-style:italic;text-transform:uppercase;color:#fff;margin-bottom:12px;">ESTOQUE — FILTROS</div>
+            <div class="uc-mock-grid">
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:#4ade80;">842</div><div class="uc-mock-lbl">Itens OK</div></div>
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:var(--yellow);">23</div><div class="uc-mock-lbl">Alerta</div></div>
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:var(--red);">07</div><div class="uc-mock-lbl">Crítico</div></div>
+            </div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:5px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:9px;"><span style="color:rgba(255,255,255,.5);">Filtro K&N Sprint F1</span><span style="color:var(--red);font-weight:800;">3 un. restantes</span></div>
+              <div class="uc-mock-prog"><div class="uc-mock-prog-fill" style="width:15%;background:var(--red);"></div></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:9px;"><span style="color:rgba(255,255,255,.5);">Filtro Mahle LX 204</span><span style="color:var(--yellow);font-weight:800;">12 un. restantes</span></div>
+              <div class="uc-mock-prog"><div class="uc-mock-prog-fill" style="width:48%;background:var(--yellow);"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uc-panel" id="uc-estetica">
+        <div>
+          <div class="uc-label">✨ Estética Automotiva</div>
+          <h2 class="uc-h2">Agenda cheia, clientes satisfeitos</h2>
+          <p class="uc-p">Gerencie agendamentos, pacotes de serviços, fotos do before/after, contratos digitais e programa de fidelidade para seus melhores clientes.</p>
+          <ul class="uc-list">
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Agenda online com confirmação automática</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Registro fotográfico antes e depois</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Gestão de pacotes e assinaturas mensais</li>
+            <li><div class="uc-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Programa de pontos e fidelidade integrado</li>
+          </ul>
+          <a href="#contact" class="btn-dk"><span>Ver demonstração →</span></a>
+        </div>
+        <div class="uc-mockup">
+          <div class="uc-mock-bar"><div class="uc-mock-dot" style="background:#ff5f57"></div><div class="uc-mock-dot" style="background:#febc2e"></div><div class="uc-mock-dot" style="background:#28c840"></div></div>
+          <div class="uc-mock-content">
+            <div style="font-size:11px;font-weight:800;font-style:italic;text-transform:uppercase;color:#fff;margin-bottom:12px;">AGENDA — HOJE</div>
+            <div class="uc-mock-grid">
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:var(--yellow);">08</div><div class="uc-mock-lbl">Agendados</div></div>
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:#4ade80;">05</div><div class="uc-mock-lbl">Concluídos</div></div>
+              <div class="uc-mock-cell"><div class="uc-mock-num" style="color:var(--blue);">03</div><div class="uc-mock-lbl">Em andamento</div></div>
+            </div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px;">
+              <div style="background:rgba(255,204,0,.1);border:1px solid rgba(255,204,0,.2);border-radius:5px;padding:7px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:9px;font-weight:700;color:#fff;">BMW 320i — Cristalização</span><span style="font-size:8px;color:var(--yellow);font-weight:800;">14:00</span></div>
+              <div style="background:rgba(28,105,212,.1);border:1px solid rgba(28,105,212,.2);border-radius:5px;padding:7px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:9px;font-weight:700;color:#fff;">Civic — PPF + Vitrificação</span><span style="font-size:8px;color:var(--blue);font-weight:800;">15:30</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     BENEFITS
+═══════════════════════════════ -->
+<section class="benefits" id="benefits">
+  <div class="benefits-inner">
+    <div class="ben-grid">
+      <div class="ben-left">
+        <div class="eyebrow"><span>Benefícios</span></div>
+        <h2 class="sec-title rt">Por que as melhores<br>oficinas escolhem<br>a <span class="hl-y">Autotech</span></h2>
+        <div class="ben-items">
+          <div class="ben-item">
+            <div class="ben-item-ico" style="background:rgba(220,20,60,.15);border:1px solid rgba(220,20,60,.2);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--red)"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <div class="ben-item-body"><h4>40% mais rápido</h4><p>Reduza o tempo de criação de OS de 12 para 3 minutos com nossos formulários inteligentes e auto-preenchimento.</p></div>
+          </div>
+          <div class="ben-item">
+            <div class="ben-item-ico" style="background:rgba(28,105,212,.15);border:1px solid rgba(28,105,212,.2);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--blue)"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="ben-item-body"><h4>Aumento de 25% no faturamento</h4><p>Clientes que usam aprovação digital convertem 68% mais orçamentos. Menos ligações, mais aprovações automáticas.</p></div>
+          </div>
+          <div class="ben-item">
+            <div class="ben-item-ico" style="background:rgba(255,204,0,.1);border:1px solid rgba(255,204,0,.2);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--yellow)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="ben-item-body"><h4>Retenção de clientes +55%</h4><p>Lembretes automáticos de revisão por km e campanhas de retorno reativam clientes que não voltam há mais de 6 meses.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="ben-right">
+        <div class="ben-float f1">🏆 Melhor do Setor 2024<div class="ben-float-sub">Premio AutoTech Brasil</div></div>
+        <div class="ben-float f2">⚡ Setup em 24 horas<div class="ben-float-sub">Implantação expressa</div></div>
+        <div class="ben-visual">
+          <div class="ben-gauge">
+            <svg class="ben-gauge-svg" viewBox="0 0 160 90">
+              <path d="M15,85 A65,65 0 0,1 145,85" fill="none" stroke="#2A2A30" stroke-width="14" stroke-linecap="round"/>
+              <path d="M15,85 A65,65 0 0,1 145,85" fill="none" stroke="url(#gg)" stroke-width="14" stroke-linecap="round" stroke-dasharray="204" stroke-dashoffset="50"/>
+              <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1C69D4"/><stop offset="100%" stop-color="#FFCC00"/></linearGradient></defs>
+            </svg>
+            <div class="ben-gauge-pct">68%</div>
+            <div class="ben-gauge-lbl">Taxa de retenção média</div>
+          </div>
+          <div class="ben-stats-row">
+            <div class="ben-stat"><div class="ben-stat-n" style="color:var(--red);">-40%</div><div class="ben-stat-l">Tempo de OS</div></div>
+            <div class="ben-stat"><div class="ben-stat-n" style="color:var(--yellow);">+25%</div><div class="ben-stat-l">Faturamento</div></div>
+            <div class="ben-stat"><div class="ben-stat-n" style="color:var(--blue);">+55%</div><div class="ben-stat-l">Retenção</div></div>
+          </div>
+          <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--cb2);">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.3);letter-spacing:1px;margin-bottom:10px;">Crescimento nos últimos 6 meses</div>
+            <svg viewBox="0 0 260 50" width="100%" height="50"><defs><linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#DC143C" stop-opacity=".3"/><stop offset="100%" stop-color="#DC143C" stop-opacity="0"/></linearGradient></defs><path d="M0,45 C20,42 40,35 60,30 C80,25 100,28 120,22 C140,16 160,10 180,8 C200,6 220,4 260,2 L260,50 L0,50Z" fill="url(#lg2)"/><path d="M0,45 C20,42 40,35 60,30 C80,25 100,28 120,22 C140,16 160,10 180,8 C200,6 220,4 260,2" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     INTEGRATIONS
+═══════════════════════════════ -->
+<section class="integrations" id="integrations">
+  <div class="sec-hdr">
+    <div class="eyebrow"><span>Integrações</span></div>
+    <h2 class="sec-title rt">Conecte tudo que<br>você já <span class="hl-r">usa</span></h2>
+    <p class="sec-sub">Integre com mais de 40 plataformas. Notas fiscais, pagamentos, fornecedores e muito mais em um clique.</p>
+  </div>
+  <div class="int-grid">
+    <div class="int-card"><div class="int-logo" style="background:#fff2e8;">🔧</div><div class="int-name">Tabela FIPE</div><div class="int-badge pop">Popular</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#e8f4ff;">📋</div><div class="int-name">SEFAZ / NF-e</div><div class="int-badge pop">Popular</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#edfbf2;">💳</div><div class="int-name">PagSeguro</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#f0f0ff;">🏦</div><div class="int-name">Boleto Bancário</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#fff8e1;">⚡</div><div class="int-name">Pix / Open Finance</div><div class="int-badge new">Novo</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#fdf0f0;">📦</div><div class="int-name">Mercado Livre</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#e8fff4;">📊</div><div class="int-name">Google Analytics</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#fdf0ff;">💬</div><div class="int-name">WhatsApp API</div><div class="int-badge pop">Popular</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#e8f8ff;">🗺️</div><div class="int-name">Google Maps</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#fff3f0;">📧</div><div class="int-name">Mailchimp</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#f0fff8;">🛒</div><div class="int-name">Shopify</div><div class="int-badge new">Novo</div></div>
+    <div class="int-card"><div class="int-logo" style="background:#fafaf0;">⭐</div><div class="int-name">Google Reviews</div></div>
+  </div>
+  <div class="int-cta">Não encontrou a sua? <a href="#contact">Solicite uma integração →</a></div>
+</section>
+
+<!-- ═══════════════════════════════
+     TESTIMONIALS
+═══════════════════════════════ -->
+<section class="testimonials" id="testimonials">
+  <div class="testi-wrap">
+    <div class="sec-hdr">
+      <div class="eyebrow lt"><span>Depoimentos</span></div>
+      <h2 class="sec-title rt dk">O que nossos clientes<br>dizem sobre a <span style="color:var(--red);">Autotech</span></h2>
+      <p class="sec-sub dk" style="margin:14px auto 0;">Líderes do setor automotivo compartilham como transformaram a gestão com nosso sistema.</p>
+    </div>
+    <div class="testi-avatars tavi-row" style="display:flex;justify-content:center;gap:10px;margin-bottom:36px;flex-wrap:wrap;">
+      <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=80&auto=format&fit=crop" class="tav" alt="">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=80&auto=format&fit=crop" class="tav" alt="">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=80&auto=format&fit=crop" class="tav" alt="">
+      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=80&auto=format&fit=crop" class="tav on" alt="">
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=80&auto=format&fit=crop" class="tav" alt="">
+      <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=80&auto=format&fit=crop" class="tav" alt="">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=80&auto=format&fit=crop" class="tav" alt="">
+    </div>
+    <div class="testi-cars" id="testiCars">
+      <div class="tcard">
+        <div class="tcard-seg"><span>✱</span> Oficina Mecânica</div>
+        <div class="tcard-user"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=80&auto=format&fit=crop" alt="Ana Costa"><h4>Ana Costa</h4><p>Gerente de Operações, AutoServ</p></div>
+        <div class="tcard-stars">★★★★★ <span>5.0</span></div>
+        <p class="tcard-q">"O controle de Ordens de Serviço manuais era um pesadelo. A automação da Autotech nos poupou horas preciosas toda semana. Reduzimos erros em 80%."</p>
+        <div class="tcard-tags"><span>Gestão de OS</span><span>Economia de Tempo</span></div>
+      </div>
+      <div class="tcard on" id="tcard-active">
+        <div class="tcard-seg"><span style="color:var(--red)">✱</span> Concessionária</div>
+        <div class="tcard-user"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=80&auto=format&fit=crop" alt="Carlos Mendes"><h4>Carlos Mendes</h4><p>Diretor Comercial, AutoPremium</p></div>
+        <div class="tcard-stars">★★★★★ <span>5.0</span></div>
+        <p class="tcard-q">"Este sistema transformou completamente a estratégia comercial da nossa rede. Fechamos orçamentos 40% mais rápido com a aprovação digital."</p>
+        <div class="tcard-tags"><span>Aprovação Digital</span><span>Vendas</span><span>Estoque</span></div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-seg"><span>✱</span> Lojas de Autopeças</div>
+        <div class="tcard-user"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=80&auto=format&fit=crop" alt="Mariana Silva"><h4>Mariana Silva</h4><p>CEO, MasterPeças</p></div>
+        <div class="tcard-stars">★★★★★ <span>4.9</span></div>
+        <p class="tcard-q">"A dor de cabeça com tabelas de peças acabou. Conseguimos gerenciar múltiplos catálogos e fornecedores em tempo real, com estoque sempre atualizado."</p>
+        <div class="tcard-tags"><span>Tabelas</span><span>Integrações</span></div>
+      </div>
+    </div>
+    <div class="testi-ctrls">
+      <button class="tbtn" onclick="prevTesti()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+      <button class="tbtn" onclick="nextTesti()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     PRICING
+═══════════════════════════════ -->
+<section class="pricing" id="pricing">
+  <div class="sec-hdr">
+    <div class="eyebrow"><span>Planos</span></div>
+    <h2 class="sec-title rt">Escolha sua <span class="hl-y">velocidade</span></h2>
+    <p class="sec-sub">Planos para cada tamanho de negócio. Sem taxas escondidas, sem fidelidade, sem surpresas.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pcard">
+      <div class="ptier">Starter</div>
+      <div class="pprice"><sub>R$</sub>149<span>/mês</span></div>
+      <div class="pdesc">Ideal para oficinas pequenas que querem digitalizar os processos básicos com facilidade.</div>
+      <div class="pdiv"></div>
+      <ul class="pfeats">
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Até 100 OS/mês</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Controle de Estoque Básico</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>App Mobile (iOS + Android)</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Suporte por e-mail</li>
+        <li class="off"><div class="pxk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Aprovação Digital</li>
+        <li class="off"><div class="pxk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Relatórios Avançados</li>
+      </ul>
+      <button class="pbtn outl" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Começar Grátis</button>
+    </div>
+    <div class="pcard hot">
+      <div class="ppop">🏆 Mais Popular</div>
+      <div class="ptier">Pro</div>
+      <div class="pprice"><sub>R$</sub>349<span>/mês</span></div>
+      <div class="pdesc">Para oficinas em crescimento que precisam de controle total e automação avançada.</div>
+      <div class="pdiv"></div>
+      <ul class="pfeats">
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>OS Ilimitadas</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Estoque Avançado + Integração FIPE</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Aprovação Digital (WhatsApp + SMS)</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Emissão de NF-e integrada</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Relatórios & Analytics completos</li>
+        <li class="off"><div class="pxk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>Multi-filial</li>
+      </ul>
+      <button class="pbtn prim" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Assinar Agora</button>
+    </div>
+    <div class="pcard">
+      <div class="ptier">Enterprise</div>
+      <div class="pprice"><sub>R$</sub>790<span>/mês</span></div>
+      <div class="pdesc">Para redes de concessionárias e grupos com múltiplas unidades e necessidades específicas.</div>
+      <div class="pdiv"></div>
+      <ul class="pfeats">
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Tudo do plano Pro</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Multi-filial ilimitado</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>API personalizada + Webhooks</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Gerente de Conta Dedicado</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>SLA 99,9% uptime garantido</li>
+        <li><div class="pck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Treinamento e onboarding dedicado</li>
+      </ul>
+      <button class="pbtn outl" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Falar com Vendas</button>
+    </div>
+  </div>
+  <div class="pricing-faq">Tem dúvidas sobre os planos? <a href="#contact">Fale com um especialista →</a></div>
+</section>
+
+<!-- ═══════════════════════════════
+     BLOG
+═══════════════════════════════ -->
+<section class="blog" id="blog">
+  <div class="sec-hdr">
+    <div class="eyebrow"><span>Blog</span></div>
+    <h2 class="sec-title rt">Novidades e <span class="hl-r">dicas</span><br>do setor automotivo</h2>
+    <p class="sec-sub">Artigos, tutoriais e tendências do mercado para manter sua oficina sempre à frente.</p>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <div class="blog-thumb" style="background:linear-gradient(135deg,var(--red),var(--red-dk));">
+        <div class="blog-thumb-inner"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="blog-cat">Gestão</div>
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta"><span>12 Jan 2025</span><div class="blog-meta-dot"></div><span>5 min de leitura</span></div>
+        <div class="blog-title">Como reduzir o tempo de OS em 40% com automação</div>
+        <p class="blog-excerpt">Descubra as estratégias que as maiores oficinas do Brasil usam para agilizar o processo de abertura e fechamento de ordens de serviço.</p>
+        <div class="blog-link"><span>Ler artigo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-thumb" style="background:linear-gradient(135deg,var(--blue),var(--blue-dk));">
+        <div class="blog-thumb-inner"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <div class="blog-cat">Tecnologia</div>
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta"><span>8 Jan 2025</span><div class="blog-meta-dot"></div><span>8 min de leitura</span></div>
+        <div class="blog-title">Integração Pix: como receber pagamentos instantâneos na sua oficina</div>
+        <p class="blog-excerpt">O Pix se tornou o meio de pagamento mais usado no Brasil. Saiba como integrar com seu sistema de gestão e eliminar a inadimplência.</p>
+        <div class="blog-link"><span>Ler artigo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-thumb" style="background:linear-gradient(135deg,#2A2A30,#1C1C20);">
+        <div class="blog-thumb-inner"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,204,0,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="blog-cat">Finanças</div>
+      </div>
+      <div class="blog-body">
+        <div class="blog-meta"><span>2 Jan 2025</span><div class="blog-meta-dot"></div><span>6 min de leitura</span></div>
+        <div class="blog-title">5 KPIs que toda oficina de sucesso monitora todo dia</div>
+        <p class="blog-excerpt">Ticket médio, taxa de retorno, margem por serviço — conheça os indicadores que separam as oficinas lucrativas das que fecham as portas.</p>
+        <div class="blog-link"><span>Ler artigo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="blog-cta">
+    <a href="#" class="btn-o"><span>Ver todos os artigos →</span></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     CONTACT
+═══════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="eyebrow"><span>Contato</span></div>
+      <h2 class="sec-title rt">Fale com<br>nossos <span class="hl-y">especialistas</span></h2>
+      <p class="sec-sub" style="margin-top:14px;margin-bottom:28px;">Nossa equipe está pronta para mostrar como o Autotech pode transformar a gestão do seu negócio.</p>
+      <div class="con-items">
+        <div class="con-item">
+          <div class="con-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 15a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 11a16 16 0 0 0 6 6l.6-1.17a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 18"/></svg></div>
+          <div class="con-info"><h5>Telefone</h5><p>+55 16 3263-9400</p></div>
+        </div>
+        <div class="con-item">
+          <div class="con-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="con-info"><h5>E-mail</h5><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="593a36372d382d3619382c2d362d3c3a31773a3634773b2b">[email&#160;protected]</a></p></div>
+        </div>
+        <div class="con-item">
+          <div class="con-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="con-info"><h5>Endereço</h5><p>Ribeirão Preto, SP — Brasil</p></div>
+        </div>
+      </div>
+      <div class="con-stepper" style="margin-top:32px;">
+        <div class="con-line" id="conLine" style="height:25%;"></div>
+        <div class="con-step on"><div class="con-step-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="con-step-txt">Identificação</span></div>
+        <div class="con-step"><div class="con-step-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><span class="con-step-txt">Sua Oficina</span></div>
+        <div class="con-step"><div class="con-step-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="con-step-txt">Necessidades</span></div>
+        <div class="con-step"><div class="con-step-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="con-step-txt">Demonstração</span></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3 class="rt">Agendar demo gratuita</h3>
+      <form id="contactForm" onsubmit="submitForm(event)">
+        <div class="fg-row">
+          <div class="fg"><label>Nome</label><input type="text" placeholder="João Silva" required></div>
+          <div class="fg"><label>Sobrenome</label><input type="text" placeholder="da Silva" required></div>
+        </div>
+        <div class="fg"><label>E-mail Profissional</label><input type="email" placeholder="joao@suaoficina.com.br" required></div>
+        <div class="fg-row">
+          <div class="fg"><label>Telefone / WhatsApp</label><input type="tel" placeholder="(16) 99999-0000"></div>
+          <div class="fg"><label>Cidade</label><input type="text" placeholder="Ribeirão Preto, SP"></div>
+        </div>
+        <div class="fg"><label>Segmento da Empresa</label>
+          <select required>
+            <option value="" disabled selected>Selecione seu segmento</option>
+            <option>Oficina Mecânica</option>
+            <option>Concessionária</option>
+            <option>Loja de Autopeças</option>
+            <option>Estética Automotiva</option>
+            <option>Rede / Grupo de Oficinas</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="fg"><label>Mensagem (opcional)</label><textarea rows="3" placeholder="Conte um pouco sobre sua necessidade..."></textarea></div>
+        <button type="submit" class="form-sub" id="formBtn"><span id="formBtnTxt">Agendar Demo Gratuita →</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     FOOTER
+═══════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap" style="margin-bottom:14px;">
+          <div style="width:4px;height:30px;border-radius:2px;background:linear-gradient(to bottom,var(--blue) 33%,var(--red) 33% 66%,var(--yellow) 66%);"></div>
+          <div class="fl-box"><span>AUTOTECH</span></div>
+        </div>
+        <p class="sec-sub" style="font-size:12.5px;color:rgba(255,255,255,.35);margin-bottom:18px;">Tecnologia de ponta para o setor automotivo brasileiro. Do estoque à aprovação digital, em um só sistema.</p>
+        <div class="footer-socials">
+          <a href="#" class="fsoc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="fsoc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" class="fsoc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="fsoc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+        </div>
+      </div>
+      <div class="fcol">
+        <h5>Produto</h5>
+        <ul>
+          <li><a href="#features">Recursos</a></li>
+          <li><a href="#usecases">Casos de Uso</a></li>
+          <li><a href="#integrations">Integrações</a></li>
+          <li><a href="#pricing">Planos e Preços</a></li>
+          <li><a href="#">Novidades</a></li>
+          <li><a href="#">Roadmap</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="#">Sobre nós</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#">Carreiras</a></li>
+          <li><a href="#">Parceiros</a></li>
+          <li><a href="#">Imprensa</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Suporte</h5>
+        <ul>
+          <li><a href="#">Central de Ajuda</a></li>
+          <li><a href="#">Documentação</a></li>
+          <li><a href="#">Status do Sistema</a></li>
+          <li><a href="#contact">Contato</a></li>
+          <li><a href="tel:+551632639400">+55 16 3263-9400</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <span class="footer-copy">© 2025 Autotech Sistemas Ltda. Todos os direitos reservados.</span>
+      <div class="footer-badges">
+        <div class="fbadge"><span>ISO 27001</span></div>
+        <div class="fbadge"><span>LGPD Compliant</span></div>
+        <div class="fbadge"><span>SOC 2 Type II</span></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════ JAVASCRIPT ═══════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Mobile menu
+function toggleMenu(){
+  const m=document.getElementById('mobMenu');
+  m.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+
+// Navbar active link on scroll
+const sections=['hero','features','usecases','benefits','integrations','pricing','blog','contact'];
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-120) cur=id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+
+// Use case tabs
+function switchTab(id,btn){
+  document.querySelectorAll('.uc-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.uc-panel').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('uc-'+id).classList.add('on');
+}
+
+// Testimonials carousel
+const cards=document.querySelectorAll('.tcard');
+const avatars=document.querySelectorAll('.tav');
+let cur=1;
+function setTesti(n){
+  cur=(n+cards.length)%cards.length;
+  cards.forEach((c,i)=>{c.classList.toggle('on',i===cur);});
+  avatars.forEach((a,i)=>{a.classList.toggle('on',i===cur);});
+}
+function prevTesti(){setTesti(cur-1);}
+function nextTesti(){setTesti(cur+1);}
+// Auto-advance
+setInterval(()=>setTesti(cur+1),5000);
+
+// Contact form with step animation
+const formInputs=document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea');
+const steps=document.querySelectorAll('.con-step');
+const conLine=document.getElementById('conLine');
+let filled=0;
+function updateSteps(){
+  let f=0;
+  formInputs.forEach(i=>{if(i.value.trim())f++;});
+  filled=f;
+  const pct=Math.min(Math.round((f/formInputs.length)*100),100);
+  const stepPct=[0,30,60,100];
+  const stepIdx=stepPct.findLastIndex(s=>pct>=s);
+  steps.forEach((s,i)=>s.classList.toggle('on',i<=stepIdx));
+  conLine.style.height=Math.max(10,Math.round(pct*0.85))+'%';
+}
+formInputs.forEach(i=>i.addEventListener('input',updateSteps));
+
+function submitForm(e){
+  e.preventDefault();
+  const btn=document.getElementById('formBtn');
+  const txt=document.getElementById('formBtnTxt');
+  txt.textContent='Enviando...';
+  btn.style.opacity='.7';
+  btn.style.cursor='not-allowed';
+  setTimeout(()=>{
+    txt.textContent='✓ Mensagem enviada! Entraremos em contato em breve.';
+    btn.style.background='linear-gradient(135deg,#16a34a,#14532d)';
+    btn.style.opacity='1';
+    steps.forEach(s=>s.classList.add('on'));
+    conLine.style.height='85%';
+  },1500);
+}
+
+// Keyboard close mobile menu
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('mobMenu').classList.remove('open'),document.body.style.overflow='';});
+
+// ── Hero company type cycler ──
+const heroTypes = [
+  {
+    label: 'oficina mecânica',
+    color: '#DC143C',
+    bg: 'rgba(220,20,60,.12)',
+    border: 'rgba(220,20,60,.3)',
+    iconBg: '#DC143C',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
+  },
+  {
+    label: 'concessionária',
+    color: '#1C69D4',
+    bg: 'rgba(28,105,212,.1)',
+    border: 'rgba(28,105,212,.3)',
+    iconBg: '#1C69D4',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>`
+  },
+  {
+    label: 'loja de autopeças',
+    color: '#FF8000',
+    bg: 'rgba(255,128,0,.1)',
+    border: 'rgba(255,128,0,.3)',
+    iconBg: '#FF8000',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`
+  },
+  {
+    label: 'estética automotiva',
+    color: '#9333EA',
+    bg: 'rgba(147,51,234,.1)',
+    border: 'rgba(147,51,234,.3)',
+    iconBg: '#9333EA',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
+  },
+  {
+    label: 'rede de oficinas',
+    color: '#FFCC00',
+    bg: 'rgba(255,204,0,.1)',
+    border: 'rgba(255,204,0,.3)',
+    iconBg: '#D4A800',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="4" cy="19" r="3"/><circle cx="20" cy="19" r="3"/><line x1="12" y1="12" x2="4" y2="16"/><line x1="12" y1="12" x2="20" y2="16"/></svg>`
+  }
+];
+let htIdx = 0;
+const htWrap = document.getElementById('heroTypeWrap');
+const htIcon = document.getElementById('heroTypeIcon');
+const htText = document.getElementById('heroTypeText');
+
+function applyHeroType(t) {
+  htWrap.style.background = t.bg;
+  htWrap.style.borderColor = t.border;
+  htIcon.style.background = t.iconBg;
+  htIcon.innerHTML = t.icon;
+  htText.style.color = t.color;
+  htText.style.textShadow = '0 0 40px ' + t.color + '60';
+  htText.textContent = t.label;
+}
+
+function cycleHeroType() {
+  htText.classList.remove('type-entering');
+  htText.classList.add('type-leaving');
+  htIcon.classList.remove('type-entering');
+  htIcon.classList.add('type-leaving');
+  setTimeout(function() {
+    htIdx = (htIdx + 1) % heroTypes.length;
+    applyHeroType(heroTypes[htIdx]);
+    htText.classList.remove('type-leaving');
+    htText.classList.add('type-entering');
+    htIcon.classList.remove('type-leaving');
+    htIcon.classList.add('type-entering');
+  }, 300);
+}
+
+// Init
+applyHeroType(heroTypes[0]);
+htText.classList.add('type-entering');
+htIcon.classList.add('type-entering');
+setInterval(cycleHeroType, 2800);
+</script>
+</body>
+</html>
