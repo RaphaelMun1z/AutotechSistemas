@@ -71,14 +71,43 @@ a{text-decoration:none;color:inherit;}
 .nav-soc svg{width:15px;height:15px;}
 .nav-cta{background:var(--gr);color:#fff;font-size:10.5px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:1px;padding:8px 18px;border-radius:4px;border:none;cursor:pointer;font-family:var(--font);transition:all .25s;white-space:nowrap;box-shadow:0 4px 16px rgba(220,20,60,.3);}
 .nav-cta:hover{box-shadow:0 8px 24px rgba(220,20,60,.5);transform:translateY(-1px);}
-.nav-hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;}
+.nav-hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;z-index:1001;}
 .nav-hbg span{display:block;width:20px;height:2px;background:#fff;border-radius:1px;transition:all .3s;}
-.mob-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(13,13,13,.98);backdrop-filter:blur(22px);z-index:1000;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
-.mob-menu.open{display:flex;}
-.mob-menu a{font-size:20px;font-weight:900;font-style:italic;text-transform:uppercase;color:rgba(255,255,255,.55);padding:11px 28px;letter-spacing:1px;transition:color .2s;}
-.mob-menu a:hover{color:#fff;}
-.mob-close{position:absolute;top:22px;right:22px;background:none;border:1px solid var(--cb2);color:#fff;width:38px;height:38px;border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;}
-.mob-cta{margin-top:14px;background:var(--gr);color:#fff;font-size:13px;font-weight:800;font-style:italic;text-transform:uppercase;letter-spacing:1.5px;padding:14px 36px;border-radius:5px;border:none;cursor:pointer;font-family:var(--font);}
+.nav-hbg.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-hbg.is-open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hbg.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Drawer overlay */
+.mob-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:998;pointer-events:none;transition:background .35s ease;}
+.mob-overlay.open{background:rgba(0,0,0,.65);pointer-events:all;}
+
+/* Drawer panel — slides from LEFT */
+.mob-menu{position:fixed;top:0;left:0;width:min(320px,85vw);height:100vh;background:var(--c1);border-right:1px solid var(--cb2);z-index:999;display:flex;flex-direction:column;transform:translateX(-100%);transition:transform .38s cubic-bezier(.22,1,.36,1);overflow-y:auto;}
+.mob-menu.open{transform:translateX(0);}
+
+/* Drawer inner layout */
+.mob-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:22px 20px 18px;border-bottom:1px solid var(--cb2);}
+.mob-drawer-logo{display:flex;align-items:center;gap:9px;}
+.mob-drawer-logo .logo-tri{width:3px;height:28px;}
+.mob-drawer-logo .logo-box{border-color:rgba(255,255,255,.6);padding:2px 7px;}
+.mob-drawer-logo .logo-main{font-size:13px;}
+.mob-drawer-logo .logo-sub{font-size:6px;}
+.mob-close{background:none;border:1px solid var(--cb2);color:rgba(255,255,255,.5);width:34px;height:34px;border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;flex-shrink:0;transition:all .2s;}
+.mob-close:hover{border-color:#fff;color:#fff;}
+
+.mob-nav{display:flex;flex-direction:column;gap:2px;padding:16px 12px;flex:1;}
+.mob-nav a{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;font-style:italic;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.45);padding:11px 12px;border-radius:6px;transition:all .2s;}
+.mob-nav a:hover{color:#fff;background:rgba(255,255,255,.06);}
+.mob-nav a .mob-nav-arrow{margin-left:auto;font-size:10px;opacity:.3;}
+.mob-nav-divider{height:1px;background:var(--cb);margin:6px 12px;}
+
+.mob-drawer-foot{padding:16px 12px 28px;border-top:1px solid var(--cb2);}
+.mob-cta{display:block;width:100%;background:var(--gr);color:#fff;font-size:13px;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:1.5px;padding:15px;border-radius:6px;border:none;cursor:pointer;font-family:var(--font);text-align:center;box-shadow:0 6px 20px rgba(220,20,60,.3);transition:all .3s;}
+.mob-cta:hover{box-shadow:0 10px 28px rgba(220,20,60,.5);}
+.mob-social-row{display:flex;gap:8px;margin-top:12px;}
+.mob-soc{width:36px;height:36px;border-radius:5px;background:var(--c2);border:1px solid var(--cb);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.35);transition:all .2s;cursor:pointer;}
+.mob-soc:hover{color:#fff;background:var(--red);border-color:var(--red);}
+.mob-soc svg{width:14px;height:14px;}
 
 /* ═══ HERO ═══ */
 .hero{position:relative;min-height:100vh;padding:clamp(130px,14vw,185px) 20px 0;display:flex;flex-direction:column;align-items:center;overflow:hidden;background:var(--c0);}
@@ -181,7 +210,185 @@ table.dtbl{width:100%;border-collapse:collapse;}
 .trv{color:#16a34a!important;font-weight:700!important;}.trt{display:inline-flex;align-items:center;gap:2px;color:var(--yellow);font-size:8.5px;}
 .trt span{color:#888;font-size:8.5px;font-weight:600;}
 
-/* ═══ HERO TYPE ANIMATION ═══ */
+/* ═══ SCROLL FADE-IN ═══ */
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.fade-in-delay-1{transition-delay:.1s;}
+.fade-in-delay-2{transition-delay:.2s;}
+.fade-in-delay-3{transition-delay:.3s;}
+.fade-in-delay-4{transition-delay:.4s;}
+.fade-in-delay-5{transition-delay:.5s;}
+
+/* ═══ FEATURES — racing card layout ═══ */
+.features-section{padding:clamp(80px,10vw,130px) 20px;background:#fff;position:relative;overflow:hidden;}
+.features-section::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),transparent 40%,transparent 60%,var(--blue));pointer-events:none;}
+
+.features-header{text-align:center;margin-bottom:clamp(48px,7vw,76px);}
+.features-title{font-size:clamp(30px,4.8vw,54px);font-weight:900;line-height:1.1;color:#111;margin-bottom:14px;letter-spacing:-1.5px;font-style:italic;text-transform:uppercase;}
+.features-title .highlight-red{position:relative;display:inline-block;color:#111;z-index:1;}
+.features-title .highlight-red::after{content:'';position:absolute;bottom:2px;left:-3px;right:-3px;height:clamp(9px,1.6vw,14px);background:var(--red);z-index:-1;transform:skewX(-12deg);opacity:.9;}
+.features-subtitle{font-size:15px;color:#777;font-weight:500;line-height:1.65;max-width:480px;margin:0 auto;}
+
+.features-content{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:center;min-height:520px;}
+
+/* Side columns */
+.features-column{display:flex;flex-direction:column;gap:16px;}
+.features-column.left{padding-right:28px;}
+.features-column.right{padding-left:28px;}
+
+/* Individual feature card */
+.feature-card{background:#fff;border:1px solid #EAEAEA;border-radius:18px;padding:22px 20px;box-shadow:0 2px 16px rgba(0,0,0,.045),0 1px 3px rgba(0,0,0,.03);transition:all .32s ease;cursor:default;position:relative;overflow:hidden;}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--red);border-radius:0 0 3px 3px;transition:height .32s ease;}
+.feature-card:hover{box-shadow:0 10px 38px rgba(0,0,0,.09);transform:translateY(-4px);}
+.feature-card:hover::before{height:100%;}
+.feature-icon{width:38px;height:38px;display:flex;align-items:center;justify-content:center;margin-bottom:11px;color:#111;opacity:.75;}
+.feature-card h3{font-size:14.5px;font-weight:800;color:#111;margin-bottom:6px;letter-spacing:-.3px;font-style:italic;text-transform:uppercase;}
+.feature-card p{font-size:12px;color:#888;line-height:1.6;font-weight:500;}
+
+/* Center mockup column */
+.features-center{position:relative;display:flex;align-items:center;justify-content:center;width:300px;flex-shrink:0;}
+
+/* Floating badges */
+.floating-badge{position:absolute;display:flex;align-items:center;justify-content:center;z-index:10;}
+.badge-number{top:50%;left:-36px;transform:translateY(-60%);width:62px;height:62px;background:#111;border-radius:16px;font-size:28px;font-weight:900;font-style:italic;color:#fff;box-shadow:0 10px 28px rgba(0,0,0,.35);}
+.badge-check{top:-10px;right:-16px;width:50px;height:50px;background:#111;border-radius:14px;box-shadow:0 10px 28px rgba(0,0,0,.35);}
+
+/* ── iPhone Mockup ── */
+.mockup-mobile{
+  width:252px;
+  background:#000;
+  border-radius:46px;
+  border:10px solid #1c1c1e;
+  box-shadow:0 0 0 1px #3a3a3c, 0 40px 80px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.05);
+  overflow:hidden;
+  position:relative;
+  flex-shrink:0;
+}
+/* Dynamic Island */
+.iph-island{
+  position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  width:84px;height:26px;background:#000;border-radius:20px;z-index:20;
+  display:flex;align-items:center;justify-content:flex-end;padding-right:9px;
+}
+.iph-cam{width:9px;height:9px;border-radius:50%;background:#0a0a0a;border:1.5px solid #111;position:relative;}
+.iph-cam::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:4px;height:4px;border-radius:50%;background:rgba(0,80,180,.35);}
+/* Screen container */
+.iph-screen{width:100%;height:488px;background:#0a0a0a;position:relative;overflow:hidden;}
+/* Status bar */
+.iph-status{
+  position:absolute;top:0;left:0;right:0;height:46px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 18px 7px;font-size:10.5px;font-weight:700;
+  color:rgba(255,255,255,.85);z-index:18;pointer-events:none;
+}
+/* Pages */
+.iph-page{
+  position:absolute;inset:0;padding-top:46px;
+  opacity:0;transform:translateX(20px);
+  transition:opacity .4s ease,transform .4s ease;
+  pointer-events:none;overflow:hidden;
+}
+.iph-page.active{opacity:1;transform:translateX(0);pointer-events:all;}
+.iph-page.leaving{opacity:0;transform:translateX(-20px);transition:opacity .25s ease,transform .25s ease;}
+/* Tap cursor dot */
+.iph-cursor{
+  position:absolute;width:14px;height:14px;border-radius:50%;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 0 0 4px rgba(255,255,255,.2),0 2px 8px rgba(0,0,0,.5);
+  pointer-events:none;z-index:99;
+  transition:top .55s cubic-bezier(.22,1,.36,1),left .55s cubic-bezier(.22,1,.36,1);
+  transform:translate(-50%,-50%);display:none;
+}
+.iph-cursor.visible{display:block;}
+/* Tap ripple */
+.iph-ripple{
+  position:absolute;width:20px;height:20px;border-radius:50%;
+  background:rgba(255,255,255,.35);transform:scale(0);
+  pointer-events:none;z-index:100;
+  animation:iphRipple .5s ease-out forwards;
+}
+@keyframes iphRipple{0%{transform:scale(0);opacity:.8;}100%{transform:scale(4);opacity:0;}}
+/* Home bar */
+.iph-home{
+  position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+  width:88px;height:4px;background:rgba(255,255,255,.3);border-radius:4px;z-index:20;
+}
+/* Slide dots */
+.iph-dots{
+  position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  display:flex;gap:5px;z-index:20;
+}
+.iph-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.25);transition:all .35s;}
+.iph-dot.active{background:#fff;width:14px;border-radius:3px;}
+
+/* ── Page 1: OS list ── */
+.pg1-top{padding:6px 13px 8px;display:flex;justify-content:space-between;align-items:center;}
+.pg1-top h3{font-size:15px;font-weight:800;color:#fff;font-style:italic;text-transform:uppercase;letter-spacing:-.3px;}
+.pg1-top span{font-size:9px;color:rgba(255,255,255,.4);background:rgba(255,255,255,.07);padding:3px 8px;border-radius:6px;font-weight:600;}
+.pg1-kpis{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 11px 9px;}
+.pg1-kpi{border-radius:13px;padding:10px 11px;}
+.pg1-kpi-n{font-size:20px;font-weight:900;font-style:italic;letter-spacing:-1px;}
+.pg1-kpi-l{font-size:8px;font-weight:700;text-transform:uppercase;opacity:.6;margin-top:2px;}
+.pg1-list{padding:0 11px;display:flex;flex-direction:column;gap:5px;}
+.pg1-row{background:rgba(255,255,255,.06);border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;cursor:pointer;}
+.pg1-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.pg1-name{font-size:10.5px;font-weight:700;color:#fff;}
+.pg1-sub{font-size:8.5px;color:rgba(255,255,255,.38);margin-top:1px;}
+.pg1-badge{font-size:7.5px;font-weight:800;padding:3px 6px;border-radius:6px;text-transform:uppercase;margin-left:auto;flex-shrink:0;}
+
+/* ── Page 2: OS detail ── */
+.pg2-card{margin:4px 11px 8px;border-radius:14px;padding:12px;background:linear-gradient(135deg,#DC143C,#6B0A1E);}
+.pg2-label{font-size:8px;font-weight:800;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:3px;}
+.pg2-title{font-size:13px;font-weight:900;color:#fff;font-style:italic;text-transform:uppercase;line-height:1.2;margin-bottom:8px;}
+.pg2-prog{height:4px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden;}
+.pg2-prog-fill{height:100%;width:72%;background:#fff;border-radius:3px;}
+.pg2-prog-lbl{font-size:8px;color:rgba(255,255,255,.5);margin-top:3px;}
+.pg2-items{padding:0 11px;display:flex;flex-direction:column;gap:5px;}
+.pg2-item{background:rgba(255,255,255,.05);border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:8px;}
+.pg2-ck{width:17px;height:17px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;}
+.pg2-txt{flex:1;font-size:10.5px;color:rgba(255,255,255,.7);font-weight:600;}
+.pg2-price{font-size:10px;font-weight:800;color:#fff;}
+.pg2-total{margin:7px 11px 0;border-radius:11px;padding:9px 12px;background:rgba(255,204,0,.1);border:1px solid rgba(255,204,0,.2);display:flex;justify-content:space-between;align-items:center;}
+.pg2-total-lbl{font-size:9px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.pg2-total-val{font-size:17px;font-weight:900;color:#FFCC00;font-style:italic;}
+
+/* ── Page 3: Estoque ── */
+.pg3-top{padding:6px 13px 8px;display:flex;justify-content:space-between;align-items:center;}
+.pg3-top h3{font-size:14px;font-weight:800;color:#fff;font-style:italic;text-transform:uppercase;}
+.pg3-alert{margin:0 11px 8px;border-radius:11px;padding:9px 11px;background:rgba(220,20,60,.1);border:1px solid rgba(220,20,60,.28);display:flex;align-items:center;gap:8px;}
+.pg3-ico{font-size:18px;flex-shrink:0;}
+.pg3-h4{font-size:11px;font-weight:800;color:#fff;margin-bottom:1px;}
+.pg3-p{font-size:9px;color:rgba(255,255,255,.42);}
+.pg3-items{padding:0 11px;display:flex;flex-direction:column;gap:5px;}
+.pg3-item{background:rgba(255,255,255,.05);border-radius:10px;padding:8px 10px;}
+.pg3-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.pg3-nm{font-size:10.5px;font-weight:700;color:#fff;}
+.pg3-qty{font-size:9.5px;font-weight:800;}
+.pg3-bar{height:4px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
+.pg3-fill{height:100%;border-radius:2px;}
+
+/* ── Page 4: Aprovação ── */
+.pg4-badge{margin:4px 11px 8px;border-radius:12px;padding:10px 12px;background:rgba(28,105,212,.12);border:1px solid rgba(28,105,212,.25);display:flex;align-items:center;gap:9px;}
+.pg4-ico{width:34px;height:34px;border-radius:9px;background:#1C69D4;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.pg4-h4{font-size:11.5px;font-weight:800;color:#fff;margin-bottom:1px;}
+.pg4-p{font-size:9px;color:rgba(255,255,255,.4);}
+.pg4-bubble{margin:0 11px 8px;background:rgba(255,255,255,.04);border-radius:11px;padding:10px 11px;}
+.pg4-bubble-lbl{font-size:8px;font-weight:800;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px;}
+.pg4-msg{background:rgba(28,105,212,.18);border-radius:0 9px 9px 9px;padding:8px 10px;font-size:10px;color:rgba(255,255,255,.75);line-height:1.55;font-weight:500;}
+.pg4-btns{padding:0 11px;display:flex;gap:7px;}
+.pg4-btn{flex:1;border-radius:11px;padding:11px;text-align:center;font-size:11px;font-weight:800;font-style:italic;text-transform:uppercase;}
+.pg4-btn.ok{background:linear-gradient(135deg,#16a34a,#14532d);color:#fff;}
+.pg4-btn.no{background:rgba(255,255,255,.06);color:rgba(255,255,255,.38);border:1px solid rgba(255,255,255,.09);}
+
+@media(max-width:960px){
+  .features-content{grid-template-columns:1fr 1fr;gap:24px;}
+  .features-center{display:none;}
+  .features-column.left,.features-column.right{padding:0;}
+}
+@media(max-width:580px){
+  .features-content{grid-template-columns:1fr;}
+  .features-column.right{padding:0;}
+}
 .hero-type-wrap{display:inline-flex;align-items:center;gap:14px;background:rgba(255,204,0,.06);border:1px solid rgba(255,204,0,.22);border-radius:8px;padding:4px 18px 4px 10px;position:relative;overflow:hidden;transition:border-color .4s,background .4s;}
 .hero-type-icon{width:46px;height:46px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .4s;}
 .hero-type-icon svg{width:26px;height:26px;color:#fff;}
@@ -341,9 +548,14 @@ table.dtbl{width:100%;border-collapse:collapse;}
 .testi-avatars{display:flex;justify-content:center;gap:10px;margin-bottom:40px;flex-wrap:wrap;}
 .tav{width:clamp(32px,5vw,40px);height:clamp(32px,5vw,40px);border-radius:4px;object-fit:cover;opacity:.4;filter:grayscale(1);transition:all .3s;transform:skewX(-8deg);cursor:pointer;}
 .tav.on{opacity:1;filter:grayscale(0);transform:skewX(-8deg) scale(1.12);border:2px solid var(--red);box-shadow:0 0 14px rgba(220,20,60,.4);}
-.testi-cars{display:flex;justify-content:center;gap:24px;align-items:stretch;flex-wrap:wrap;margin-bottom:36px;}
-.tcard{background:var(--ltS);border-radius:8px;padding:clamp(18px,4vw,32px) clamp(16px,3vw,26px);width:100%;max-width:370px;opacity:.38;transform:scale(.9);transition:all .4s;border:1px solid var(--ltB);display:flex;flex-direction:column;position:relative;}
-.tcard.on{opacity:1;transform:scale(1);border:1px solid rgba(220,20,60,.3);border-top:4px solid var(--red);box-shadow:0 18px 48px rgba(0,0,0,.08);z-index:2;}
+.testi-cars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:36px;align-items:start;}
+.tcard{background:var(--ltS);border-radius:10px;padding:22px 20px;width:100%;opacity:.45;transform:scale(.97);transition:all .4s;border:1px solid var(--ltB);display:flex;flex-direction:column;position:relative;}
+.tcard.on{opacity:1;transform:scale(1);border:1px solid rgba(220,20,60,.28);border-top:4px solid var(--red);box-shadow:0 16px 44px rgba(0,0,0,.1);z-index:2;}
+@media(max-width:820px){
+  .testi-cars{grid-template-columns:1fr;}
+  .tcard:not(.on){display:none;}
+  .tcard.on{opacity:1;transform:none;}
+}
 .tcard-seg{position:absolute;top:18px;left:18px;font-size:10px;font-weight:700;text-transform:uppercase;font-style:italic;color:var(--txm);display:flex;align-items:center;gap:5px;}
 .tcard-user{display:flex;flex-direction:column;align-items:center;margin-top:6px;margin-bottom:16px;}
 .tcard-user img{width:50px;height:50px;border-radius:4px;object-fit:cover;transform:skewX(-4deg);margin-bottom:9px;border:2px solid var(--ltB);}
@@ -408,35 +620,47 @@ table.dtbl{width:100%;border-collapse:collapse;}
 
 /* ═══ CONTACT ═══ */
 .contact{background:var(--c2);padding:clamp(70px,10vw,110px) 20px clamp(80px,12vw,140px);border-top:1px solid var(--cb);}
-.contact-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(40px,7vw,90px);align-items:start;}
+.contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 200px 1.55fr;gap:clamp(28px,4vw,56px);align-items:start;}
 .contact-left{}
-.contact-left .sec-sub{margin-top:14px;margin-bottom:32px;}
-.con-items{display:flex;flex-direction:column;gap:16px;}
+.contact-left .sec-sub{margin-top:14px;margin-bottom:28px;}
+.con-items{display:flex;flex-direction:column;gap:14px;}
 .con-item{display:flex;align-items:center;gap:12px;}
 .con-ico{width:40px;height:40px;border-radius:6px;transform:skewX(-8deg);background:var(--c3);border:1px solid var(--cb2);display:flex;justify-content:center;align-items:center;flex-shrink:0;}
 .con-ico svg{transform:skewX(8deg);width:18px;height:18px;color:var(--red);}
 .con-info h5{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.4);margin-bottom:2px;}
-.con-info p{font-size:13.5px;font-weight:700;color:#fff;}
-.con-stepper{display:flex;flex-direction:column;gap:16px;margin-top:32px;position:relative;}
-.con-stepper::before{content:'';position:absolute;left:19px;top:4px;bottom:4px;width:2px;background:var(--cb2);z-index:0;}
-.con-step{display:flex;align-items:center;gap:12px;position:relative;z-index:1;}
+.con-info p{font-size:13px;font-weight:700;color:#fff;}
+/* Stepper — standalone middle column */
+.con-stepper-col{display:flex;flex-direction:column;padding-top:4px;}
+.con-stepper-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.22);margin-bottom:12px;}
+.con-stepper{display:flex;flex-direction:column;position:relative;}
+.con-stepper::before{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:var(--cb2);z-index:0;}
+.con-line{position:absolute;left:19px;top:20px;width:2px;background:var(--red);box-shadow:0 0 8px var(--red);transition:height .5s;z-index:2;height:0%;}
+.con-step{display:flex;align-items:center;gap:10px;position:relative;z-index:1;padding:11px 0;}
 .con-step-ico{width:40px;height:40px;border-radius:5px;transform:skewX(-8deg);background:var(--c0);border:2px solid var(--cb2);display:flex;justify-content:center;align-items:center;color:rgba(255,255,255,.3);transition:all .3s;flex-shrink:0;}
-.con-step-ico svg{transform:skewX(8deg);width:18px;height:18px;}
-.con-step-txt{font-size:12px;font-weight:700;text-transform:uppercase;font-style:italic;color:rgba(255,255,255,.3);}
-.con-step.on .con-step-ico{border-color:var(--red);color:var(--red);box-shadow:0 0 16px rgba(220,20,60,.25);background:rgba(220,20,60,.08);}
+.con-step-ico svg{transform:skewX(8deg);width:17px;height:17px;}
+.con-step-txt{font-size:11px;font-weight:700;text-transform:uppercase;font-style:italic;color:rgba(255,255,255,.28);white-space:nowrap;}
+.con-step.on .con-step-ico{border-color:var(--red);color:var(--red);box-shadow:0 0 14px rgba(220,20,60,.25);background:rgba(220,20,60,.08);}
 .con-step.on .con-step-txt{color:#fff;}
-.con-line{position:absolute;left:19px;top:0;width:2px;background:var(--red);box-shadow:0 0 8px var(--red);transition:height .5s;z-index:2;}
-.contact-form{background:var(--c0);padding:clamp(24px,4vw,40px);border-radius:10px;border:1px solid var(--cb2);box-shadow:0 20px 50px rgba(0,0,0,.5);border-top:4px solid var(--blue);}
-.contact-form h3{font-size:clamp(20px,3vw,26px);font-weight:900;font-style:italic;text-transform:uppercase;color:#fff;margin-bottom:28px;letter-spacing:-.3px;}
-.fg{margin-bottom:18px;}
-.fg label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:6px;letter-spacing:.5px;}
-.fg input,.fg select,.fg textarea{width:100%;background:var(--c3);border:1px solid var(--cb2);border-radius:5px;padding:13px 14px;color:#f0f0f0;font-family:var(--font);font-size:13.5px;font-weight:500;transition:border-color .3s,box-shadow .3s;outline:none;resize:none;}
+/* Form */
+.contact-form{background:var(--c0);padding:clamp(22px,3.5vw,36px);border-radius:10px;border:1px solid var(--cb2);box-shadow:0 20px 50px rgba(0,0,0,.5);border-top:4px solid var(--blue);}
+.contact-form h3{font-size:clamp(17px,2.2vw,22px);font-weight:900;font-style:italic;text-transform:uppercase;color:#fff;margin-bottom:22px;letter-spacing:-.3px;}
+.fg{margin-bottom:15px;}
+.fg label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:5px;letter-spacing:.5px;}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--c3);border:1px solid var(--cb2);border-radius:5px;padding:11px 13px;color:#f0f0f0;font-family:var(--font);font-size:13px;font-weight:500;transition:border-color .3s,box-shadow .3s;outline:none;resize:none;}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,105,212,.12);}
 .fg select option{background:var(--c3);}
-.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.form-sub{width:100%;background:var(--gr);color:#fff;border:none;padding:16px;border-radius:5px;font-size:14px;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:1.5px;font-family:var(--font);cursor:pointer;transition:all .3s;margin-top:6px;transform:skewX(-8deg);box-shadow:0 6px 20px rgba(220,20,60,.3);}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-sub{width:100%;background:var(--gr);color:#fff;border:none;padding:14px;border-radius:5px;font-size:13px;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:1.5px;font-family:var(--font);cursor:pointer;transition:all .3s;margin-top:4px;transform:skewX(-8deg);box-shadow:0 6px 20px rgba(220,20,60,.3);}
 .form-sub>span{display:inline-block;transform:skewX(8deg);}
 .form-sub:hover{background:var(--gy);color:var(--txd);transform:skewX(-8deg) translateY(-2px);box-shadow:0 12px 28px rgba(255,204,0,.35);}
+@media(max-width:1024px){
+  .contact-inner{grid-template-columns:1fr 1fr;}
+  .con-stepper-col{display:none;}
+}
+@media(max-width:580px){
+  .contact-inner{grid-template-columns:1fr;}
+  .fg-row{grid-template-columns:1fr;}
+}
 
 /* ═══ FOOTER ═══ */
 .footer{background:var(--c0);border-top:1px solid var(--cb2);padding:clamp(50px,7vw,80px) 20px clamp(24px,3vw,36px);}
@@ -549,18 +773,39 @@ table.dtbl{width:100%;border-collapse:collapse;}
   </nav>
 </div>
 
-<div class="mob-menu" id="mobMenu">
-  <button class="mob-close" onclick="toggleMenu()">✕</button>
-  <a href="#hero" onclick="toggleMenu()">Início</a>
-  <a href="#features" onclick="toggleMenu()">Recursos</a>
-  <a href="#usecases" onclick="toggleMenu()">Casos de Uso</a>
-  <a href="#benefits" onclick="toggleMenu()">Benefícios</a>
-  <a href="#integrations" onclick="toggleMenu()">Integrações</a>
-  <a href="#pricing" onclick="toggleMenu()">Planos</a>
-  <a href="#blog" onclick="toggleMenu()">Blog</a>
-  <a href="#contact" onclick="toggleMenu()">Contato</a>
-  <button class="mob-cta" onclick="toggleMenu();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Começar Grátis</button>
-</div>
+<div class="mob-overlay" id="mobOverlay" onclick="toggleMenu()"></div>
+<nav class="mob-menu" id="mobMenu">
+  <div class="mob-drawer-head">
+    <div class="mob-drawer-logo">
+      <div class="logo-tri"></div>
+      <div class="logo-box">
+        <span class="logo-main">AUTOTECH</span>
+        <span class="logo-sub">SISTEMAS</span>
+      </div>
+    </div>
+    <button class="mob-close" onclick="toggleMenu()">✕</button>
+  </div>
+  <div class="mob-nav">
+    <a href="#hero" onclick="toggleMenu()">Início <span class="mob-nav-arrow">→</span></a>
+    <a href="#features" onclick="toggleMenu()">Recursos <span class="mob-nav-arrow">→</span></a>
+    <a href="#usecases" onclick="toggleMenu()">Casos de Uso <span class="mob-nav-arrow">→</span></a>
+    <a href="#benefits" onclick="toggleMenu()">Benefícios <span class="mob-nav-arrow">→</span></a>
+    <div class="mob-nav-divider"></div>
+    <a href="#integrations" onclick="toggleMenu()">Integrações <span class="mob-nav-arrow">→</span></a>
+    <a href="#pricing" onclick="toggleMenu()">Planos <span class="mob-nav-arrow">→</span></a>
+    <a href="#blog" onclick="toggleMenu()">Blog <span class="mob-nav-arrow">→</span></a>
+    <div class="mob-nav-divider"></div>
+    <a href="#contact" onclick="toggleMenu()">Contato <span class="mob-nav-arrow">→</span></a>
+  </div>
+  <div class="mob-drawer-foot">
+    <button class="mob-cta" onclick="toggleMenu();document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Começar Grátis — 14 dias</button>
+    <div class="mob-social-row">
+      <a href="#" class="mob-soc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" class="mob-soc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="#" class="mob-soc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+    </div>
+  </div>
+</nav>
 
 <!-- ═══════════════════════════════
      HERO
@@ -648,110 +893,186 @@ table.dtbl{width:100%;border-collapse:collapse;}
 <!-- ═══════════════════════════════
      FEATURES
 ═══════════════════════════════ -->
-<section class="features" id="features">
-  <div class="feat-header">
-    <div class="eyebrow lt"><span>Recursos</span></div>
-    <h2 class="feat-h2">Recursos poderosos<br>na ponta dos seus <span class="hl-yellow-text">dedos<span class="hl-underline"></span></span></h2>
-    <p class="feat-header-sub">Acesso instantâneo a ferramentas, templates e ações para um fluxo de trabalho simplificado na sua gestão.</p>
-  </div>
-
-  <div class="feat-scene">
-    <!-- Left cards -->
-    <div class="feat-col-left">
-      <div class="fc">
-        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <h4>Ordens de Serviço</h4>
-        <p>Mantenha-se organizado com rastreamento interativo das suas OS em tempo real.</p>
-      </div>
-      <div class="fc">
-        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-        <h4>Painel de Controle</h4>
-        <p>Brainstorm e planejamento visual interativo com dados em tempo real.</p>
-      </div>
-      <div class="fc">
-        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h4>Financeiro</h4>
-        <p>Gerencie faturas, fluxo de caixa e relatórios com clareza total.</p>
-      </div>
+<section class="features-section" id="features">
+    <div class="features-header fade-in">
+        <div class="eyebrow lt"><span>Recursos</span></div>
+        <h2 class="features-title racing-title">Recursos na <span class="highlight-red">palma da mão</span></h2>
+        <p class="features-subtitle">Acesso instantâneo a ferramentas, integrações e ações rápidas para um fluxo de trabalho simplificado na sua oficina.</p>
     </div>
-
-    <!-- Central phone mockup -->
-    <div class="feat-phone-wrap">
-      <div class="feat-num-badge">24</div>
-      <div style="position:relative;">
-        <div class="feat-check-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <div class="features-content">
+        <div class="features-column left">
+            <div class="feature-card fade-in fade-in-delay-1">
+                <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></div>
+                <h3 class="racing-title" style="font-size:15px;">Ordens de Serviço</h3>
+                <p>Mantenha-se organizado com rastreamento interativo das suas OS em tempo real.</p>
+            </div>
+            <div class="feature-card fade-in fade-in-delay-2">
+                <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
+                <h3 class="racing-title" style="font-size:15px;">Painel de Controle</h3>
+                <p>Planeje e gerencie pátio e mecânicos em tempo real com facilidade.</p>
+            </div>
+            <div class="feature-card fade-in fade-in-delay-3">
+                <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                <h3 class="racing-title" style="font-size:15px;">Financeiro</h3>
+                <p>Controle receitas, despesas e fluxo de caixa com relatórios precisos.</p>
+            </div>
         </div>
-        <div class="feat-phone">
-          <div class="feat-phone-status">
-            <span>9:41</span>
-            <span style="display:flex;align-items:center;gap:3px;font-size:9px;">
-              <svg width="12" height="10" viewBox="0 0 20 14" fill="#111"><rect x="0" y="4" width="3" height="10" rx="1"/><rect x="4" y="2" width="3" height="12" rx="1"/><rect x="8" y="0" width="3" height="14" rx="1"/><rect x="12" y="3" width="3" height="11" rx="1" opacity=".35"/></svg>
-              <svg width="13" height="10" viewBox="0 0 20 15" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 7.5 C5 3.5 15 3.5 18.5 7.5"/><path d="M4 10.5 C6.5 7.5 13.5 7.5 16 10.5"/><circle cx="10" cy="14" r="1.5" fill="#111" stroke="none"/></svg>
-              <svg width="20" height="10" viewBox="0 0 28 14" fill="#111"><rect x="0" y="1" width="23" height="12" rx="2"/><rect x="24" y="4" width="4" height="6" rx="1" opacity=".5"/><rect x="1" y="2" width="19" height="10" rx="1.5" fill="#111"/></svg>
-            </span>
-          </div>
-          <div class="feat-phone-nav">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            <div style="display:flex;gap:12px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-            </div>
-          </div>
-          <div class="feat-phone-title">Revisão Toyota Corolla 2025</div>
-          <div style="height:2px;background:#f0f0f0;margin:0 18px 12px;border-radius:1px;"></div>
-          <div class="feat-phone-body">
-            <!-- Color section -->
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;border-bottom:1px solid #f5f5f5;padding-bottom:10px;">
-              <div style="text-align:center;">
-                <div style="font-size:10px;font-weight:700;color:#1C69D4;margin-bottom:4px;">Cor do texto</div>
-                <div style="width:28px;height:28px;border-radius:6px;background:#111;margin:0 auto;border:2px solid #eee;"></div>
+        <div class="features-center">
+            <div class="floating-badge badge-number">24</div>
+            <div class="floating-badge badge-check"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="mockup-mobile" id="iphoneMockup">
+              <!-- Dynamic Island -->
+              <div class="iph-island"><div class="iph-cam"></div></div>
+              <!-- Status bar -->
+              <div class="iph-status">
+                <span>9:41</span>
+                <span style="display:flex;align-items:center;gap:3px;">
+                  <svg width="12" height="10" viewBox="0 0 20 14" fill="rgba(255,255,255,.85)"><rect x="0" y="4" width="3" height="10" rx="1"/><rect x="4.5" y="2" width="3" height="12" rx="1"/><rect x="9" y="0" width="3" height="14" rx="1"/><rect x="13.5" y="3" width="3" height="11" rx="1" opacity=".3"/></svg>
+                  <svg width="14" height="10" viewBox="0 0 20 14" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round"><path d="M1 5 C5 1 15 1 19 5"/><path d="M4 8 C6.5 5.5 13.5 5.5 16 8"/><circle cx="10" cy="12" r="1.5" fill="rgba(255,255,255,.85)" stroke="none"/></svg>
+                  <svg width="22" height="10" viewBox="0 0 28 14" fill="rgba(255,255,255,.85)"><rect x="0" y="1" width="23" height="12" rx="2"/><rect x="24" y="4" width="4" height="6" rx="1" opacity=".4"/><rect x="1.5" y="2.5" width="17" height="9" rx="1"/></svg>
+                </span>
               </div>
-              <div style="text-align:center;">
-                <div style="font-size:10px;font-weight:700;color:#555;margin-bottom:4px;">Fonte</div>
-                <div style="font-size:20px;font-weight:700;color:#111;">Aa</div>
-              </div>
-            </div>
-            <!-- Status tiles -->
-            <div class="feat-color-row">
-              <div class="feat-color-tile" style="background:linear-gradient(135deg,#e8d5f0,#f5e6ff);"><span style="color:#9333ea;font-size:8.5px;font-weight:800;">Revisão</span></div>
-              <div class="feat-color-tile selected" style="background:linear-gradient(135deg,#86efac,#22c55e);"><span style="color:#fff;font-size:8.5px;font-weight:800;">Concluído</span></div>
-              <div class="feat-color-tile" style="background:linear-gradient(135deg,#fde68a,#f59e0b);"><span style="color:#fff;font-size:8.5px;font-weight:800;">Aguardando</span></div>
-            </div>
-            <!-- Sliders -->
-            <div style="margin-top:10px;">
-              <div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="font-size:9px;color:#888;font-weight:700;">Cor do doc</span></div>
-              <div style="height:7px;border-radius:4px;background:linear-gradient(90deg,#7C3AED,#DC2626);position:relative;margin-bottom:8px;">
-                <div style="position:absolute;right:20%;top:-3px;width:13px;height:13px;background:#fff;border-radius:50%;border:2.5px solid #7C3AED;box-shadow:0 1px 4px rgba(0,0,0,.2);"></div>
-              </div>
-              <div style="height:7px;border-radius:4px;background:linear-gradient(90deg,#3B82F6,#06B6D4);position:relative;">
-                <div style="position:absolute;right:35%;top:-3px;width:13px;height:13px;background:#fff;border-radius:50%;border:2.5px solid #3B82F6;box-shadow:0 1px 4px rgba(0,0,0,.2);"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              <!-- Tap cursor -->
+              <div class="iph-cursor" id="iphCursor"></div>
+              <!-- Screen -->
+              <div class="iph-screen">
+                <!-- PAGE 1: OS List -->
+                <div class="iph-page active" id="iphPage0">
+                  <div class="pg1-top"><h3>Ordens de Serviço</h3><span>46 abertas</span></div>
+                  <div class="pg1-kpis">
+                    <div class="pg1-kpi" style="background:rgba(220,20,60,.15);">
+                      <div class="pg1-kpi-n" style="color:#DC143C;">18</div>
+                      <div class="pg1-kpi-l" style="color:#DC143C;">Urgente</div>
+                    </div>
+                    <div class="pg1-kpi" style="background:rgba(28,105,212,.15);">
+                      <div class="pg1-kpi-n" style="color:#1C69D4;">28</div>
+                      <div class="pg1-kpi-l" style="color:#1C69D4;">Em andamento</div>
+                    </div>
+                  </div>
+                  <div class="pg1-list">
+                    <div class="pg1-row" id="iphRow0" style="outline:2px solid transparent;transition:outline .2s;">
+                      <div class="pg1-dot" style="background:#DC143C;"></div>
+                      <div><div class="pg1-name">Toyota Corolla — FAZ-4821</div><div class="pg1-sub">Revisão 60.000 km · R$ 1.240</div></div>
+                      <div class="pg1-badge" style="background:rgba(220,20,60,.18);color:#DC143C;">Urgente</div>
+                    </div>
+                    <div class="pg1-row">
+                      <div class="pg1-dot" style="background:#1C69D4;"></div>
+                      <div><div class="pg1-name">Honda Civic — GHJ-9932</div><div class="pg1-sub">Troca de embreagem · R$ 890</div></div>
+                      <div class="pg1-badge" style="background:rgba(28,105,212,.18);color:#1C69D4;">Andamento</div>
+                    </div>
+                    <div class="pg1-row">
+                      <div class="pg1-dot" style="background:#FFCC00;"></div>
+                      <div><div class="pg1-name">VW Gol — PLT-3310</div><div class="pg1-sub">Alinhamento + balanceamento</div></div>
+                      <div class="pg1-badge" style="background:rgba(255,204,0,.15);color:#FFCC00;">Aguardando</div>
+                    </div>
+                    <div class="pg1-row">
+                      <div class="pg1-dot" style="background:#16a34a;"></div>
+                      <div><div class="pg1-name">Fiat Uno — BRT-1104</div><div class="pg1-sub">Troca de óleo · R$ 180</div></div>
+                      <div class="pg1-badge" style="background:rgba(22,163,74,.18);color:#4ade80;">Concluído</div>
+                    </div>
+                  </div>
+                </div>
 
-    <!-- Right cards -->
-    <div class="feat-col-right">
-      <div class="fc">
-        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
-        <h4>Aprovação Digital</h4>
-        <p>Insira e compartilhe orçamentos com link mágico para aprovação do cliente.</p>
-      </div>
-      <div class="fc">
-        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
-        <h4>Tabelas e Estoque</h4>
-        <p>Insira e personalize tabelas de peças de forma muito mais clara e organizada.</p>
-      </div>
-      <div class="fc">
-        <div class="fc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-        <h4>NF-e Integrada</h4>
-        <p>Emita Notas Fiscais eletrônicas diretamente pelo painel, integrado com SEFAZ.</p>
-      </div>
+                <!-- PAGE 2: OS Detail -->
+                <div class="iph-page" id="iphPage1">
+                  <div class="pg2-card">
+                    <div class="pg2-label">OS #4821 · Toyota Corolla</div>
+                    <div class="pg2-title">Revisão 60.000 km</div>
+                    <div class="pg2-prog"><div class="pg2-prog-fill"></div></div>
+                    <div class="pg2-prog-lbl">72% concluído · Previsão: 16h30</div>
+                  </div>
+                  <div class="pg2-items">
+                    <div class="pg2-item"><div class="pg2-ck" style="background:rgba(22,163,74,.2);color:#4ade80;">✓</div><div class="pg2-txt">Troca de óleo e filtro</div><div class="pg2-price">R$ 180</div></div>
+                    <div class="pg2-item"><div class="pg2-ck" style="background:rgba(22,163,74,.2);color:#4ade80;">✓</div><div class="pg2-txt">Filtro de ar</div><div class="pg2-price">R$ 95</div></div>
+                    <div class="pg2-item"><div class="pg2-ck" style="background:rgba(255,204,0,.15);color:#FFCC00;">⏳</div><div class="pg2-txt">Pastilhas de freio dianteiro</div><div class="pg2-price">R$ 420</div></div>
+                    <div class="pg2-item"><div class="pg2-ck" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.3);">○</div><div class="pg2-txt" style="opacity:.5;">Alinhamento e balanceamento</div><div class="pg2-price" style="opacity:.4;">R$ 120</div></div>
+                  </div>
+                  <div class="pg2-total">
+                    <span class="pg2-total-lbl">Total OS</span>
+                    <span class="pg2-total-val">R$ 1.240</span>
+                  </div>
+                </div>
+
+                <!-- PAGE 3: Estoque -->
+                <div class="iph-page" id="iphPage2">
+                  <div class="pg3-top"><h3>Estoque</h3><span style="font-size:9px;color:rgba(255,255,255,.4);background:rgba(255,255,255,.07);padding:3px 8px;border-radius:6px;font-weight:600;">7 alertas</span></div>
+                  <div class="pg3-alert">
+                    <div class="pg3-ico">⚠️</div>
+                    <div><div class="pg3-h4">Estoque crítico</div><div class="pg3-p">3 itens abaixo do mínimo</div></div>
+                  </div>
+                  <div class="pg3-items">
+                    <div class="pg3-item">
+                      <div class="pg3-row"><span class="pg3-nm">Filtro K&N Sprint F1</span><span class="pg3-qty" style="color:#DC143C;">3 un.</span></div>
+                      <div class="pg3-bar"><div class="pg3-fill" style="width:12%;background:#DC143C;"></div></div>
+                    </div>
+                    <div class="pg3-item">
+                      <div class="pg3-row"><span class="pg3-nm">Pastilha Cobreq Diant.</span><span class="pg3-qty" style="color:#FFCC00;">8 un.</span></div>
+                      <div class="pg3-bar"><div class="pg3-fill" style="width:32%;background:#FFCC00;"></div></div>
+                    </div>
+                    <div class="pg3-item">
+                      <div class="pg3-row"><span class="pg3-nm">Óleo Mobil 5W30 1L</span><span class="pg3-qty" style="color:#4ade80;">42 un.</span></div>
+                      <div class="pg3-bar"><div class="pg3-fill" style="width:84%;background:#4ade80;"></div></div>
+                    </div>
+                    <div class="pg3-item">
+                      <div class="pg3-row"><span class="pg3-nm">Kit Embreagem Valeo</span><span class="pg3-qty" style="color:#FFCC00;">6 un.</span></div>
+                      <div class="pg3-bar"><div class="pg3-fill" style="width:24%;background:#FFCC00;"></div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PAGE 4: Aprovação Digital -->
+                <div class="iph-page" id="iphPage3">
+                  <div class="pg4-badge">
+                    <div class="pg4-ico">📋</div>
+                    <div><div class="pg4-h4">Aprovação pendente</div><div class="pg4-p">Toyota Corolla · OS #4821</div></div>
+                  </div>
+                  <div class="pg4-bubble">
+                    <div class="pg4-bubble-lbl">Mensagem ao cliente</div>
+                    <div class="pg4-msg">Olá, João! Concluímos a análise do seu Corolla. Identificamos que as pastilhas dianteiras precisam de troca. O valor total ficou em <strong style="color:#fff;">R$ 1.240</strong>. Podemos prosseguir?</div>
+                  </div>
+                  <div class="pg4-btns">
+                    <div class="pg4-btn ok">✓ Aprovar</div>
+                    <div class="pg4-btn no">✗ Recusar</div>
+                  </div>
+                  <div style="padding:8px 11px 0;">
+                    <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:9px 11px;display:flex;align-items:center;gap:8px;">
+                      <div style="width:28px;height:28px;border-radius:8px;background:rgba(22,163,74,.2);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">💬</div>
+                      <div>
+                        <div style="font-size:10px;font-weight:700;color:#fff;margin-bottom:1px;">Link enviado via WhatsApp</div>
+                        <div style="font-size:9px;color:rgba(255,255,255,.4);">há 3 minutos · aguardando resposta</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /iph-screen -->
+              <!-- Dots -->
+              <div class="iph-dots">
+                <div class="iph-dot active" id="iphDot0"></div>
+                <div class="iph-dot" id="iphDot1"></div>
+                <div class="iph-dot" id="iphDot2"></div>
+                <div class="iph-dot" id="iphDot3"></div>
+              </div>
+              <div class="iph-home"></div>
+            </div><!-- /mockup-mobile -->
+        </div>
+        <div class="features-column right">
+            <div class="feature-card fade-in fade-in-delay-1">
+                <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
+                <h3 class="racing-title" style="font-size:15px;">Aprovação Digital</h3>
+                <p>Envie orçamentos via link mágico para aprovação rápida do cliente.</p>
+            </div>
+            <div class="feature-card fade-in fade-in-delay-2">
+                <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="12" x2="21" y2="12"></line><line x1="12" y1="3" x2="12" y2="21"></line></svg></div>
+                <h3 class="racing-title" style="font-size:15px;">Estoque e Tabelas</h3>
+                <p>Insira e personalize o controle de peças de forma muito mais clara.</p>
+            </div>
+            <div class="feature-card fade-in fade-in-delay-3">
+                <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+                <h3 class="racing-title" style="font-size:15px;">NF-e Integrada</h3>
+                <p>Emita notas fiscais diretamente do sistema, integrado com o SEFAZ.</p>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- ═══════════════════════════════
@@ -759,8 +1080,7 @@ table.dtbl{width:100%;border-collapse:collapse;}
 ═══════════════════════════════ -->
 <section class="usecases" id="usecases">
   <div class="uc-wrap">
-    <div class="sec-hdr">
-      <div class="eyebrow lt"><span>Casos de Uso</span></div>
+    <div class="sec-hdr fade-in">
       <h2 class="sec-title rt dk">Feito para cada tipo<br>de <span style="color:var(--red);">negócio automotivo</span></h2>
       <p class="sec-sub dk">Seja sua oficina pequena ou uma rede de concessionárias, o Autotech se adapta ao seu fluxo de trabalho.</p>
     </div>
@@ -905,7 +1225,7 @@ table.dtbl{width:100%;border-collapse:collapse;}
 <section class="benefits" id="benefits">
   <div class="benefits-inner">
     <div class="ben-grid">
-      <div class="ben-left">
+      <div class="ben-left fade-in">
         <div class="eyebrow"><span>Benefícios</span></div>
         <h2 class="sec-title rt">Por que as melhores<br>oficinas escolhem<br>a <span class="hl-y">Autotech</span></h2>
         <div class="ben-items">
@@ -923,7 +1243,7 @@ table.dtbl{width:100%;border-collapse:collapse;}
           </div>
         </div>
       </div>
-      <div class="ben-right">
+      <div class="ben-right fade-in fade-in-delay-2">
         <div class="ben-float f1">🏆 Melhor do Setor 2024<div class="ben-float-sub">Premio AutoTech Brasil</div></div>
         <div class="ben-float f2">⚡ Setup em 24 horas<div class="ben-float-sub">Implantação expressa</div></div>
         <div class="ben-visual">
@@ -955,12 +1275,12 @@ table.dtbl{width:100%;border-collapse:collapse;}
      INTEGRATIONS
 ═══════════════════════════════ -->
 <section class="integrations" id="integrations">
-  <div class="sec-hdr">
+  <div class="sec-hdr fade-in">
     <div class="eyebrow"><span>Integrações</span></div>
     <h2 class="sec-title rt">Conecte tudo que<br>você já <span class="hl-r">usa</span></h2>
     <p class="sec-sub">Integre com mais de 40 plataformas. Notas fiscais, pagamentos, fornecedores e muito mais em um clique.</p>
   </div>
-  <div class="int-grid">
+  <div class="int-grid fade-in fade-in-delay-2">
     <div class="int-card"><div class="int-logo" style="background:#fff2e8;">🔧</div><div class="int-name">Tabela FIPE</div><div class="int-badge pop">Popular</div></div>
     <div class="int-card"><div class="int-logo" style="background:#e8f4ff;">📋</div><div class="int-name">SEFAZ / NF-e</div><div class="int-badge pop">Popular</div></div>
     <div class="int-card"><div class="int-logo" style="background:#edfbf2;">💳</div><div class="int-name">PagSeguro</div></div>
@@ -982,7 +1302,7 @@ table.dtbl{width:100%;border-collapse:collapse;}
 ═══════════════════════════════ -->
 <section class="testimonials" id="testimonials">
   <div class="testi-wrap">
-    <div class="sec-hdr">
+    <div class="sec-hdr fade-in">
       <div class="eyebrow lt"><span>Depoimentos</span></div>
       <h2 class="sec-title rt dk">O que nossos clientes<br>dizem sobre a <span style="color:var(--red);">Autotech</span></h2>
       <p class="sec-sub dk" style="margin:14px auto 0;">Líderes do setor automotivo compartilham como transformaram a gestão com nosso sistema.</p>
@@ -1030,12 +1350,12 @@ table.dtbl{width:100%;border-collapse:collapse;}
      PRICING
 ═══════════════════════════════ -->
 <section class="pricing" id="pricing">
-  <div class="sec-hdr">
+  <div class="sec-hdr fade-in">
     <div class="eyebrow"><span>Planos</span></div>
     <h2 class="sec-title rt">Escolha sua <span class="hl-y">velocidade</span></h2>
     <p class="sec-sub">Planos para cada tamanho de negócio. Sem taxas escondidas, sem fidelidade, sem surpresas.</p>
   </div>
-  <div class="pricing-grid">
+  <div class="pricing-grid fade-in fade-in-delay-2">
     <div class="pcard">
       <div class="ptier">Starter</div>
       <div class="pprice"><sub>R$</sub>149<span>/mês</span></div>
@@ -1090,12 +1410,12 @@ table.dtbl{width:100%;border-collapse:collapse;}
      BLOG
 ═══════════════════════════════ -->
 <section class="blog" id="blog">
-  <div class="sec-hdr">
+  <div class="sec-hdr fade-in">
     <div class="eyebrow"><span>Blog</span></div>
     <h2 class="sec-title rt">Novidades e <span class="hl-r">dicas</span><br>do setor automotivo</h2>
     <p class="sec-sub">Artigos, tutoriais e tendências do mercado para manter sua oficina sempre à frente.</p>
   </div>
-  <div class="blog-grid">
+  <div class="blog-grid fade-in fade-in-delay-2">
     <div class="blog-card">
       <div class="blog-thumb" style="background:linear-gradient(135deg,var(--red),var(--red-dk));">
         <div class="blog-thumb-inner"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
@@ -1143,10 +1463,11 @@ table.dtbl{width:100%;border-collapse:collapse;}
 ═══════════════════════════════ -->
 <section class="contact" id="contact">
   <div class="contact-inner">
-    <div class="contact-left">
+    <!-- Col 1: contact info -->
+    <div class="contact-left fade-in">
       <div class="eyebrow"><span>Contato</span></div>
       <h2 class="sec-title rt">Fale com<br>nossos <span class="hl-y">especialistas</span></h2>
-      <p class="sec-sub" style="margin-top:14px;margin-bottom:28px;">Nossa equipe está pronta para mostrar como o Autotech pode transformar a gestão do seu negócio.</p>
+      <p class="sec-sub" style="margin-top:14px;margin-bottom:28px;">Nossa equipe está pronta para mostrar como a Autotech pode transformar a gestão do seu negócio.</p>
       <div class="con-items">
         <div class="con-item">
           <div class="con-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 15a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 11a16 16 0 0 0 6 6l.6-1.17a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 18"/></svg></div>
@@ -1154,22 +1475,39 @@ table.dtbl{width:100%;border-collapse:collapse;}
         </div>
         <div class="con-item">
           <div class="con-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div class="con-info"><h5>E-mail</h5><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="593a36372d382d3619382c2d362d3c3a31773a3634773b2b">[email&#160;protected]</a></p></div>
+          <div class="con-info"><h5>E-mail</h5><p>contato@autotech.com.br</p></div>
         </div>
         <div class="con-item">
           <div class="con-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div class="con-info"><h5>Endereço</h5><p>Ribeirão Preto, SP — Brasil</p></div>
         </div>
       </div>
-      <div class="con-stepper" style="margin-top:32px;">
-        <div class="con-line" id="conLine" style="height:25%;"></div>
-        <div class="con-step on"><div class="con-step-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span class="con-step-txt">Identificação</span></div>
-        <div class="con-step"><div class="con-step-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><span class="con-step-txt">Sua Oficina</span></div>
-        <div class="con-step"><div class="con-step-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="con-step-txt">Necessidades</span></div>
-        <div class="con-step"><div class="con-step-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span class="con-step-txt">Demonstração</span></div>
+    </div>
+    <!-- Col 2: stepper -->
+    <div class="con-stepper-col fade-in fade-in-delay-2">
+      <div class="con-stepper-lbl">Processo</div>
+      <div class="con-stepper">
+        <div class="con-line" id="conLine"></div>
+        <div class="con-step on">
+          <div class="con-step-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <span class="con-step-txt">Identificação</span>
+        </div>
+        <div class="con-step">
+          <div class="con-step-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <span class="con-step-txt">Seu Negócio</span>
+        </div>
+        <div class="con-step">
+          <div class="con-step-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <span class="con-step-txt">Necessidades</span>
+        </div>
+        <div class="con-step">
+          <div class="con-step-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span class="con-step-txt">Demo Agendada</span>
+        </div>
       </div>
     </div>
-    <div class="contact-form">
+    <!-- Col 3: form -->
+    <div class="contact-form fade-in fade-in-delay-3">
       <h3 class="rt">Agendar demo gratuita</h3>
       <form id="contactForm" onsubmit="submitForm(event)">
         <div class="fg-row">
@@ -1264,11 +1602,16 @@ table.dtbl{width:100%;border-collapse:collapse;}
 
 <!-- ═══════ JAVASCRIPT ═══════ -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Mobile menu
+// Mobile drawer — slide from left
 function toggleMenu(){
-  const m=document.getElementById('mobMenu');
-  m.classList.toggle('open');
-  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+  const menu = document.getElementById('mobMenu');
+  const overlay = document.getElementById('mobOverlay');
+  const btn = document.getElementById('hambtn');
+  const isOpen = menu.classList.contains('open');
+  menu.classList.toggle('open', !isOpen);
+  overlay.classList.toggle('open', !isOpen);
+  btn.classList.toggle('is-open', !isOpen);
+  document.body.style.overflow = isOpen ? '' : 'hidden';
 }
 
 // Navbar active link on scroll
@@ -1341,7 +1684,98 @@ function submitForm(e){
 }
 
 // Keyboard close mobile menu
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('mobMenu').classList.remove('open'),document.body.style.overflow='';});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.getElementById('mobMenu').classList.remove('open');
+    document.getElementById('mobOverlay').classList.remove('open');
+    document.getElementById('hambtn').classList.remove('is-open');
+    document.body.style.overflow='';
+  }
+});
+
+// ── iPhone screen cycling animation ──
+(function(){
+  const pages = document.querySelectorAll('.iph-page');
+  const dots  = document.querySelectorAll('.iph-dot');
+  const cursor= document.getElementById('iphCursor');
+  const mockup= document.getElementById('iphoneMockup');
+  if(!pages.length || !cursor || !mockup) return;
+
+  let current = 0;
+  const TOTAL  = pages.length;
+
+  // Where the cursor taps on each page (% of mockup dimensions)
+  const taps = [
+    {left:'68%', top:'60%'},   // page 0 → tap first OS row
+    {left:'50%', top:'87%'},   // page 1 → tap total bar
+    {left:'50%', top:'52%'},   // page 2 → tap stock item
+    {left:'33%', top:'73%'},   // page 3 → tap approve button
+  ];
+
+  function spawnRipple(left, top) {
+    const r = document.createElement('div');
+    r.className = 'iph-ripple';
+    r.style.cssText = `left:${left};top:${top};margin-left:-10px;margin-top:-10px;`;
+    mockup.appendChild(r);
+    setTimeout(() => r.remove(), 600);
+  }
+
+  function goNext() {
+    const prev = current;
+    current = (current + 1) % TOTAL;
+
+    pages[prev].classList.add('leaving');
+    pages[prev].classList.remove('active');
+    dots[prev].classList.remove('active');
+
+    setTimeout(() => pages[prev].classList.remove('leaving'), 350);
+
+    pages[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function tick() {
+    const t = taps[current];
+
+    // 1. Move cursor to tap position
+    cursor.classList.add('visible');
+    cursor.style.left  = t.left;
+    cursor.style.top   = t.top;
+
+    // 2. After travel time: press + ripple
+    setTimeout(() => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(.55)';
+      spawnRipple(t.left, t.top);
+
+      // 3. Release + switch page
+      setTimeout(() => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        setTimeout(() => {
+          cursor.classList.remove('visible');
+          goNext();
+        }, 200);
+      }, 220);
+    }, 550);
+  }
+
+  // Start after 1.8s, then every 3.6s
+  setTimeout(() => {
+    tick();
+    setInterval(tick, 3600);
+  }, 1800);
+})();
+
+// ── Scroll fade-in ──
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
 // ── Hero company type cycler ──
 const heroTypes = [
